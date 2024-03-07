@@ -1,0 +1,24 @@
+\qecho Team Spongeboob Final Project
+
+\c postgres
+DROP DATABASE VSPlatform;
+
+SELECT current_database();
+
+CREATE DATABASE VSPlatform;
+
+\c VSPlatform
+
+SELECT current_database();
+
+CREATE TABLE ...
+
+...
+
+\c postgres
+
+SELECT current_database();
+
+\c VSPlatform
+
+SELECT current_database();

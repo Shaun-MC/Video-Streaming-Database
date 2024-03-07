@@ -12,5 +12,4 @@ The current offerings of movie streaming platforms lack collaborative content vi
 
 ## Schema
 
-![alt text](<Spongebob_Schema - Page 6.png>)
-
+![alt text](<DB_Schema.png>)
