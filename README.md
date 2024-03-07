@@ -12,4 +12,4 @@ The current offerings of movie streaming platforms lack collaborative content vi
 
 ## Schema
 
-![alt text](<DB_Schema.png>)
+![alt text](<Schema/DB_Schema.png>)
