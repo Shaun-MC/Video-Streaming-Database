@@ -9,6 +9,6 @@ VALUES (1, 1, 'it was three and a half hours and i wanted more?? don’t know wh
        (5, 2, 'why don’t they just take fremen and push it somewhere else', 1, '2024-03-06'),
        (3, 2, 'Bombastic and relentless 5-star entertainment', 5, '2024-03-05'),
        (6, 3, 'look i came to watch hot people fuck and fight and i got what i wanted', 5, '2023-01-01'),
-       (7, 3, 'Inspiring! I like that. There’s love, naked people, a lot of inspiration and kinda good music.', 3, '2023-01-15'),
+       (1, 3, 'Inspiring! I like that. There’s love, naked people, a lot of inspiration and kinda good music.', 3, '2023-01-15'),
        (2, 3, 'if i knew glenn powel was needing money this bad i would’ve raised online funding', 1' '2023-12-25')
        ;
