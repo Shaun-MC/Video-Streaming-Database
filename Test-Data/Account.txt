@@ -6,5 +6,7 @@ INSERT INTO Account(SubscriberID, ProfilePicID, name)
 VALUES (1, 2, "SCush"), (1, 1, "Burner"),
        (2, 2, "SRam"), 
        (3, 1, "MChen"),
-       (3, 3, "CCehn")
-       ;
+       (4, 3, "CCehn")
+       (5, 1, "TempAcc1")
+       (5, 2, "TempAcc2")
+       

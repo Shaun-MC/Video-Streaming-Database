@@ -1,7 +1,7 @@
 /**
  * CSS 475 Team Project
  * @team Team Spongebob
- * @authors Shaun Cushman, Shyam Ramesh, Mike Chen, Chirs Chen
+ * @authors Shaun Cushman, Shyam Ramesh, Mike Chen, Chris Chen
  * @version 3/8/2024
  */
 
