@@ -1,0 +1,9 @@
+\qecho Create MovieToActor Test Data - Shaun Cushman
+\qecho Usage - Within the VSPlatform DB 
+\qecho
+
+INSERT INTO ProfilePicture (picture)
+VALUES ('/ProfilePic/Image1.png'), 
+       ('/ProfilePic/Image2.png'), 
+       ('/ProfilePic/Image3.png')
+        ; 

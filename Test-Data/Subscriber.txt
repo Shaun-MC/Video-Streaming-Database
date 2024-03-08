@@ -1,0 +1,10 @@
+\qecho Create MovieToActor Test Data - Shaun Cushman
+\qecho Usage - Within the VSPlatform DB 
+\qecho 
+
+INSERT INTO Subscriber (firstName, lastName, email)
+VALUES ('Shaun', 'Cushman', 'scush@uw.edu'),
+       ('Shyam', 'Ramesh', 'sramesh@uw.edu'),
+       ('Mike', 'Chen', 'mchen@uw.edu),
+       ('Chris', 'Chen', 'cchen@uw.edu)
+       ;

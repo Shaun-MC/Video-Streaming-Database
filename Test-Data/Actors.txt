@@ -1,0 +1,9 @@
+\qecho Create Actor Test Data - Shaun Cushman
+\qecho Usage - Within the VSPlatform DB 
+\qecho
+
+INSERT INTO Actors (firstName, lastName)
+VALUES ('Cilian', 'Murphy'), ('Emily', 'Blunt'), ('Matt', 'Damon'), ('Robert', 'Downey Jr'), ('Alden', 'Ehrenreich'),
+       ('Timothee', 'Chalament'), ('Zendaya'), ('Rebecca', 'Fergusson'), ('Javier', 'Bardem'), ('Josh', 'Brolin'),
+       ('Sydney' 'Sweeney'), ('Glen', 'Powell')
+       ;

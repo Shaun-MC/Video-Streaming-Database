@@ -1,0 +1,7 @@
+\qecho Create Director Test Data - Shaun Cushman
+\qecho Usage - Within the VSPlatform DB 
+\qecho
+
+INSERT INTO Director (firstName, lastName)
+VALUES ('Christopher', 'Nolan'), ('Denis', 'Villeneuve'), 
+       ('Will', 'Gluck');

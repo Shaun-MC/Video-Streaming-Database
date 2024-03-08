@@ -1,0 +1,10 @@
+\qecho Create MovieToActor Test Data - Shaun Cushman
+\qecho Usage - Within the VSPlatform DB 
+\qecho
+
+INSERT INTO Account(SubscriberID, ProfilePicID, name)
+VALUES (1, 2, "SCush"), (1, 1, "Burner"),
+       (2, 2, "SRam"), 
+       (3, 1, "MChen"),
+       (3, 3, "CCehn")
+       ;

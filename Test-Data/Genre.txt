@@ -1,0 +1,9 @@
+\qecho Create Genre Test Data - Shaun Cushman
+\qecho Usage - Within the VSPlatform DB 
+\qecho
+
+INSERT INTO Genre(name)
+VALUES ('Biography'), ('Drama'), ('History'),
+       ('Action'), ('Adventure'), ('Drama'), ('Sci-Fi'),
+       ('Comedy'), ('Romance')
+       ;
