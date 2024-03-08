@@ -2,11 +2,11 @@
 \qecho Usage - Within the VSPlatform DB 
 \qecho
 
-INSERT INTO Account(SubscriberID, ProfilePicID, name)
-VALUES (1, 2, "SCush"), (1, 1, "Burner"),
-       (2, 2, "SRam"), 
-       (3, 1, "MChen"),
-       (4, 3, "CCehn")
-       (5, 1, "TempAcc1")
-       (5, 2, "TempAcc2")
-       
+INSERT INTO Account(ProfilePicID, firstName, lastName, userName, email)
+VALUES (2, 'Shaun', 'Cushman', 'SCush', 'scush@gmail.com),
+       (1, 'Shyam', 'Ramesh', 'SRam', 'sram@gmail.com),
+       (3, 'Mike', 'Chen', 'MChen', 'mchen@gmail.com'),
+       (1, 'Chris', 'Chen', 'CChen', 'cchem@gmai.com'),
+       (2, 'Shaun', 'Cushman', 'SCBurner', 'scushman@gmail.com),
+       (2, 1, 'Temp', 'Temp', 'tempOr', 'temp@gmail.com)
+       ;

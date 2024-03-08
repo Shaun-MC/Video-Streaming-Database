@@ -45,11 +45,6 @@ class APIDriver {
                 case 'e':
                 break;
 
-                // Subscriber APIs
-                case 'S':
-                callSubscriberAPIs(user_input);
-                break;
-
                 // Account APIs
                 case 'A':
                 callAccountAPIs(user_input);
@@ -94,29 +89,6 @@ class APIDriver {
     System.out.println("Goodbye.");
 
     // MSPlatformDB.disconnect();
-}
-
-private static void callSubscriberAPIs(String user_input) {
-
-    // user_input == the specific API desired to be called or nothing
-        // In the nothing case - call all the API for their descriptions
-    switch (user_input[1]) {
-
-        // Each API has their own case
-        case 
-        
-        case 
-
-        case 
-
-        case 
-
-        case 
-
-        default: 
-
-        // Call everything
-    }
 }
 
 private static void callAccountAPIs(String user_input) {
