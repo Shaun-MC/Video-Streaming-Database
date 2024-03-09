@@ -358,16 +358,15 @@ public class MovieDB {
         try {
 
             // Open Connection
-            Connection connection = getConnection();
+            Connection connection = Connect();
 
             // Create Query
-            String query = "INSERT INTO Genre(name) 
-                            VALUES (?)";
+            String query = "INSERT INTO Genre(name) VALUES (?)";
 
             // Assign Nessecary SQL Objects
             p_statement = connection.prepareStatment(query);
             p_statement.setString(1, userInput[0]); // Whatever the passed in Genre name is 
-            resultSet = statement.executeQuery(query);
+            resultSet = p_statement.executeQuery(query);
 
             int success = p_statement.executeUpdate();
 
@@ -410,7 +409,7 @@ public class MovieDB {
         try {
 
             // Open Connection
-            Connection connection = getConnection();
+            Connection connection = Connect();
 
             // Create Query
             String query = "SELECT M.title " +
@@ -426,7 +425,7 @@ public class MovieDB {
             // Assign Nessecary SQL Objects
             p_statement = connection.prepareStatment(query);
             p_statement.setString(1, userInput[0]) // Whatever the requested Genre name is 
-            resultSet = statement.executeQuery(query);
+            resultSet = p_statement.executeQuery(query);
 
             boolean successful_q = false;
 
@@ -472,18 +471,17 @@ public class MovieDB {
         try {
 
             // Open Connection
-            Connection connection = getConnection();
+            Connection connection = Connect();
 
             // Create Query
-            String query = "INSERT INTO Actor(firstName, lastName) 
-                            VALUES (?, ?)";
+            String query = "INSERT INTO Actor(firstName, lastName) VALUES (?, ?)";
 
             // Assign Nessecary SQL Objects
             p_statement = connection.prepareStatment(query);
             p_statement.setString(1, userInput[1]); // Whatever the passed in firstName
             p_statement.setString(2, userInput[2]); // Whatever the passed in firstName
             
-            resultSet = statement.executeQuery(query);
+            resultSet = p_statement.executeQuery(query);
 
             int success = p_statement.executeUpdate();
 
@@ -517,7 +515,7 @@ public class MovieDB {
       *@ author: Shaun Cushman
       */
 
-    public static void listAllActorsMovies(String[] user_input) throws SQLException { // UNTESTED
+    public static void listActorsMovies(String[] user_input) throws SQLException { // UNTESTED
 
         // Initializae SQL Objects
         PreparedStatement p_statement = null;
@@ -526,7 +524,7 @@ public class MovieDB {
         try {
 
             // Open Connection
-            Connection connection = getConnection();
+            Connection connection = Connect();
 
             // Create Query
             String query = "SELECT M.title " +
@@ -572,6 +570,7 @@ public class MovieDB {
             resultSet.close();
         }
     }
+}
 
 
 

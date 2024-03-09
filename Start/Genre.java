@@ -32,7 +32,7 @@ public class Genre {
 
            try {
 
-            return MovieDB.createNewGenre(user_input);
+            MovieDB.createGenre(user_input);
 
            } catch (SQLException e) {
 
@@ -61,7 +61,7 @@ public class Genre {
 
             try {
 
-                MovieDB.listAllMoviePerGenre(user_input);
+                MovieDB.listAllMoviesPerGenre(user_input);
 
             } catch (SQLException e) {
 

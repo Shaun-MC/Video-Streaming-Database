@@ -9,268 +9,264 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLExecution;
+import java.sql.SQLException;
 
 class APIDriver {
 
     public static void main (String[] args) {
 
-        // MSPlatformDB.getConnection();
-
         // Header / Welcome Message
         System.out.println("---Movie Streaming Platform---");
-        System.out.println("Input 'L' to list all the available APIs. (Case Insensitive)");
+        System.out.println("Input 'L' to list all the available APIs and their required input. (Case Insensitive)");
         System.out.println("Input 'E' to exit the program. (Case Insensitive) ");
         System.out.println("Input An API Name and Assciated Input to Execute That API. (Case Sensitive)");
 
         String user_input = "";
+        
+        while (!user_input.equalsIgnoreCase("E")) {
 
-        while (!user_input.equalsIgnoreCase('E')) {
-
-            bool flag = false;
+            boolean flag = false;
 
             System.out.print("MSPlatform: ");
             
             // Retrieve user input from the command line
-            user_input = System.console.readLine();
+            user_input = System.console().readLine();
 
-            switch (user_input[0]) {
+            String[] commands = user_input.split(" ", 2);
 
-                case 'L':
-                case 'l': 
+            switch (commands[1]) {
+
+                case "L":
+                case "l": 
                 ListOfAPIs();
                 break;
 
-                case 'E':
-                case 'e':
+                case "E":
+                case "e":
                 break;
 
                 // Account APIs
-                case 'A':
-                callAccountAPIs(user_input);
+                case "A":
+                case "a":
+                APIDriver.callAccountAPIs(user_input);
                 break;
 
                 // ProfilePicture APIs
                 case "PP":
-                callProfilePictureAPIs(user_input);
+                case "pp":
+                APIDriver.callProfilePictureAPIs(user_input);
                 break;
 
                 // Movie APIs
-                case 'M':
-                callMovieAPIs(user_input);
+                case "M":
+                case "m":
+                APIDriver.callMovieAPIs(user_input);
                 break;
 
                 // Review APIs
-                case 'R':
-                callReviewAPIs(user_input);
+                case "R":
+                case "r":
+                APIDriver.callReviewAPIs(user_input);
                 break;
 
                 // Viewing Party APIs
                 case "VP":
-                callViewingPartyAPIs(user_input);
+                case "vp":
+                APIDriver.callViewingPartyAPIs(user_input);
                 break;
 
                 // Genre APIs
-                case 'G': 
-                callGenreAPIs(user_input);
+                case "G": 
+                case "g":
+                APIDriver.callGenreAPIs(user_input);
                 break;
 
                 // Actor APIs
                 case "ACT":
-                callActorAPIs(user_input);
+                case "act":
+                APIDriver.callActorAPIs(user_input);
                 break;
 
                 default:
                 System.out.println("MSPlatform: API Type Not Recognized. Try Again.");
             }
         }
+
+        System.out.println("Goodbye");
     }
 
-    System.out.println("Goodbye.");
+    private static void callAccountAPIs(String user_input) {
 
-    // MSPlatformDB.disconnect();
-}
+        // user_input == the specific API desired to be called or nothing
+            // In the nothing case - call all the API for their descriptions
+        switch (user_input[1]) {
 
-private static void callAccountAPIs(String user_input) {
-
-    // user_input == the specific API desired to be called or nothing
-        // In the nothing case - call all the API for their descriptions
-    switch (user_input[1]) {
-
-        // Each API has their own case
-        case 
-            
-        case 
-    
-        case 
-    
-        case 
-    
-        case 
-
-        default: 
-    
-        // Call everything
-    }
-}
-
-private static void callProfilePictureAPIs(null) {
-
-    // user_input == the specific API desired to be called or nothing
-        // In the nothing case - call all the API for their descriptions
-    switch (user_input[1]) {
-
-        // Each API has their own case
-        case 
-            
-        case 
-    
-        case 
-    
-        case 
-    
-        case 
-    
-        default: 
-    
-        // Call everything
-    }
-}
-
-private static void callMovieAPIs(null) {
-
-    // user_input == the specific API desired to be called or nothing
-        // In the nothing case - call all the API for their descriptions
-    switch (user_input[1]) {
-
-        // Each API has their own case
-        case 
-            
-        case 
-    
-        case 
-    
-        case 
-    
-        case 
-    
-        default: 
-    
-        // Call everything
-    }
-}
-
-private static void callReviewAPIs(null) {
-
-    // user_input == the specific API desired to be called or nothing
-        // In the nothing case - call all the API for their descriptions
-    switch (user_input[1]) {
-
-        // Each API has their own case
-        case 
-            
-        case 
-    
-        case 
-    
-        case 
-    
-        case 
-    
-        default: 
-    
-        // Call everything
-    }
-}
-
-private static void callViewingPartyAPIs(null) {
-
-    // user_input == the specific API desired to be called or nothing
-        // In the nothing case - call all the API for their descriptions
-    switch (user_input[1]) {
-
-        // Each API has their own case
-        case 
-            
-        case 
-    
-        case 
-    
-        case 
-    
-        case 
-    
-        default: 
-    
-        // Call everything
-    }
-}
-
-private static void callGenreAPIs(null) {
-
-    // user_input == the specific API desired to be called or nothing
-        // In the nothing case - call all the API for their descriptions
-    switch (user_input[1]) {
-
-        // Each API has their own case
-        case Genre.ListAllGenres:
-        Genre.listAllGenres(...);
-        break;
-
-        case Genre.CreateNewGenre:
-        Genre.createNewGenre(...);
-        break;
-
-        case Genre.ListAllMoviesPerGenre:
-        Genre.listAllMoviesPerGenre(...)
-        break;
-
-        // Call everything
-        default: 
+            // Each API has their own case
+            /*case: 
+                
+            case:
         
-        Genre.listAllGenres(null);
-        Genre.createNewGenre(null);
-        Genre.listLeastEnjoyedGenre(null);
-    }
-}
+            case:
+        
+            case: 
+        
+            case: */
 
-private static void callActorAPIs(null) {
+            // Call everything
+            default: 
+        
+        }
+    }
+
+    private static void callProfilePictureAPIs(String[] user_input) {
+
+        // user_input == the specific API desired to be called or nothing
+            // In the nothing case - call all the API for their descriptions
+        switch (user_input[1]) {
+
+            // Each API has their own case
+            /*case: 
+                
+            case: 
+        
+            case: 
+        
+            case: 
+        
+            case: */
+            
+            // Call everything
+            default: 
+        
+        }
+    }
+
+    private static void callMovieAPIs(null) {
+
+        // user_input == the specific API desired to be called or nothing
+            // In the nothing case - call all the API for their descriptions
+        switch (user_input[1]) {
+
+            // Each API has their own case
+            /*case: 
+                
+            case: 
+        
+            case: 
+        
+            case: 
+        
+            case: */
+            
+            // Call everything
+            default: 
+        
+        }
+    }
+
+    private static void callReviewAPIs(String[] user_input) {
+
+        // user_input == the specific API desired to be called or nothing
+            // In the nothing case - call all the API for their descriptions
+        switch (user_input[1]) {
+
+            // Each API has their own case
+            /*case: 
+                
+            case: 
+        
+            case:
+        
+            case: 
+        
+            case: */
+            
+            // Call everything
+            default: 
+        
+        }
+    }
+
+private static void callViewingPartyAPIs(String[] user_input) {
 
     // user_input == the specific API desired to be called or nothing
         // In the nothing case - call all the API for their descriptions
     switch (user_input[1]) {
 
         // Each API has their own case
-        case 
+        /*case: 
             
-        case 
+        case: 
     
-        case 
+        case: 
     
-        case 
+        case: 
     
-        case 
-    
-        default: 
+        case: */
     
         // Call everything
+        default: 
+    }
+}
+
+private static void callGenreAPIs(String[] user_input) {
+
+    // user_input == the specific API desired to be called or nothing
+        // In the nothing case - call all the API for their descriptions
+    switch (user_input[1]) {
+
+        // Each API has their own case
+        case Genre.createGenre:
+        Genre.createGenre(null);
+        break;
+
+        case Genre.listAllMoviesPerGenre:
+        Genre.listAllMoviesPerGenre(null);
+        break;
+
+        // Call everything
+        default: 
+        Genre.createGenre(null);
+        Genre.listAllMoviesPerGenre(null);
+    }
+}
+
+private static void callActorAPIs(String[] user_input) {
+
+    // user_input == the specific API desired to be called or nothing
+        // In the nothing case - call all the API for their descriptions
+    switch (user_input[1]) {
+
+        // Each API has their own case
+        case Actor.createActor:
+        Actor.createActor(null);
+        break;
+    
+        case Actor.listActorsMovies:
+        Actor.listAllActorsMovies(null):
+        break;
+
+        // Call everything
+        default: 
+        Actor.createActor(null);
+        Actor.listAllActorsMovies(null);
     }
 }
 
 private static void ListOfAPIs() {
 
     // Calls all the currently available APIs
-    callAccountAPIs(null);
+    APIDriver.callAccountAPIs("X");
 
-    callProfilePictureAPIs(null);
+    APIDriver.callProfilePictureAPIs("X");
 
-    callMovieAPIs(null);
+    APIDriver.callMovieAPIs("X");
 
-    callReviewAPIs(null);
+    APIDriver.callReviewAPIs("X");
 
-    callViewingPartyAPIs(null);
+    APIDriver.callViewingPartyAPIs("X");
 
-    callGenreAPIs(null);
+    APIDriver.callGenreAPIs("X"); // UNTESTED
 
-    callActorAPIs(null);
+    APIDriver.callActorAPIs("X"); // UNTESTED
 }
