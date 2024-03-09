@@ -10,6 +10,7 @@
  public class Genre {
  
      public static final String cmdListAllGenres = "listAllGenres"
+     public static final String cmdListAllMoviesPerGenre = "listAllMoviesPerGenre"
      public static final String cmdListMostEnjoyedGenre = "listMostEnjoyedGenre"
      public static final String cmdListLeastEnjoyedGenre = "listLeastEnjoyedGenre"
  
@@ -24,12 +25,49 @@
          if (user_input == null) {
  
              // Print detailed explanation of the API
-             System.out.println("listAllGenres - Returns a list of all the genres that have movies assigned with them");
-             System.out.println("Command: listAllGenres")
+             System.out.println("listAllGenres - Returns a list of all the genres in the database");
+             System.out.println("Command: listAllGenres");
+
          } else {
  
-             // Execute API
+            try {
+
+                MovieDB.listAllGenres();
+
+            } catch (SQLException e) {
+
+                e.printStackTrace();
+            }
          }
+     }
+
+     /**
+      * Lists all the Movies asscoiated w/ a Genre
+      *
+      * @author: Shaun Cushman
+      */
+
+     public static void listAllMoviesPerGenre(String [] user_input) {
+
+        if (user_input == null) {
+ 
+            // Print detailed explanation of the API
+            System.out.println("listAllMovies - Returns a list of all the movies associated w/ a genre");
+            System.out.println("Command: listAllMoviesPerGenre <Genre Name>");
+
+        } else { 
+            
+            // Execute API
+
+           try {
+
+                MovieDB.listAllMoviePerGenre(user_input);
+
+           } catch (SQLException e) {
+
+               e.printStackTrace();
+           }
+        }
      }
  
      /**
@@ -37,16 +75,26 @@
       *
       * @author: Shaun Cushman
       */
-     public static void listMostPopularGenre(String[] user_input) {
+     public static void listMostEnjoyedGenre(String[] user_input) {
  
          if (user_input == null) {
  
              // Display explanation of the APIs purpose
-             System.out.println("listMostEnjoyedGenre - Lists the name of the genre w/ the highest average rating score associated w/ their movies, and their avg score");
+             System.out.println("listMostEnjoyedGenre - Lists the name of the genre w/ the highest average rating 
+                                 score associated w/ their movies, and their avg score");
+             
              System.out.println("Command: listMostEnjoyedGenre")
+
          } else {
  
-             // Execute API
+            try {
+
+                MovieDB.listMostEnjoyedGenre();
+
+            } catch (SQLException e) {
+
+                e.printStackTrace();
+            }
          }
      }
  
@@ -55,16 +103,27 @@
       *
       * @author: Shaun Cushman
       */
-     public static void listLeastPopularGenre(String[] user_input) {
+     public static void listLeastEnjoyedGenre(String[] user_input) {
  
         if (user_input == null) {
  
             // Display detailed explanation of APIs purpose
-            System.out.println("listLeastEnjoyedGenre - Lists the name of the genre w/ the lowest average rating score associated w/ their movies, and their avg score");
-            System.out.println("Command: listLeastEnjoyedGenre")
+            System.out.println("listLeastEnjoyedGenre - Lists the name of the genre w/ the lowest average rating score associated 
+                                w/ their movies, and their avg score");
+
+            System.out.println("Command: listLeastEnjoyedGenre");
         } else {
- 
+            
             // Execute API
+
+            try {
+
+                MovieDB.listLeastEnjoyedGenre();
+
+            } catch (SQLException e) {
+
+                e.printStackTrace();
+            }
         }
      }
  }

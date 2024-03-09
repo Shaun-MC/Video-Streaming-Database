@@ -213,19 +213,28 @@ private static void callGenreAPIs(null) {
     switch (user_input[1]) {
 
         // Each API has their own case
-        case 
+        case Genre.cmdListAllGenres:
+        Genre.listAllGenres(...);
+        break;
+
+        case Genre.cmdListAllMoviesPerGenre:
+        Genre.listAllMoviesPerGenre(...)
+        
+        case Genre.cmdListMostEnjoyedGenre:
+        Genre.listMostEnjoyedGenre(...);
+        break;
             
-        case 
-    
-        case 
-    
-        case 
-    
-        case 
-    
-        default: 
-    
+        case Genre.cmdListLeastEnjoyedGenre:
+        Genre.listLeastEnjoyedGenre(...);
+        break;
+
         // Call everything
+        default: 
+        
+        Genre.listAllGenres(null);
+        Genre.listAllMoviesPerGenre(null);
+        Genre.listMostEnjoyedGenre(null);
+        Genre.listLeastEnjoyedGenre(null);
     }
 }
 
@@ -255,9 +264,6 @@ private static void callActorAPIs(null) {
 private static void ListOfAPIs() {
 
     // Calls all the currently available APIs
-
-    callSubscriberAPIs(null);
-
     callAccountAPIs(null);
 
     callProfilePictureAPIs(null);
