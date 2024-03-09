@@ -1,575 +1,579 @@
-/*
+/** 
  * DB APIs and associated methods:
  * Connect(), Disconnect(), ListAllAccounts(), ListAllSubscribers(), InsertMovies(), InsertProfilePicture(), and InsertGenre().
  * 
  * Done by Chris Chen, may need to review for debug and further update.
- * 
+ *
  */
 
- package final_project;
+package final_project;
 
- import java.sql.*;
- import java.util.HashMap;
- import java.util.Properties;
+import java.sql.*;
+import java.util.HashMap;
+import java.util.Properties;
  
- public class MovieDB {
-     // JDBC URL, username, and password of PostgreSQL server (TO BE ACCUSTOMED)
-     private static final String URL = "jdbc:postgresql://localhost:5432/movietoacct"; 
-     private static final String USER = "postgres";
-     private static final String PASSWORD = "2606";
-     private static Connection connection = null;
+public class MovieDB {
      
-     //functions:
-     public static Connection Connect() throws SQLException{
+    // JDBC URL, username, and password of PostgreSQL server (TO BE ACCUSTOMED)
+    private static final String URL = "jdbc:postgresql://localhost:5432/movietoacct"; 
+    private static final String USER = "postgres";
+    private static final String PASSWORD = "2606";
+    private static Connection connection = null;
+     
+    // Functions:
+    public static Connection Connect() throws SQLException {
          
-         if(connection != null && !connection.isValid(10000))
-         {
-             connection = null;
+        if(connection != null && !connection.isValid(10000)) {
+             
+            connection = null;
          }
          
-         int tries = 0;
-         while(connection == null || connection.isClosed())
-         {
-             try {
-                 tries++;
-                 System.out.println("Trying to connect to a DB.");
- 
-                 Properties property_c = new Properties();
-                 property_c.put("user", USER);
-                 property_c.put("password", PASSWORD);
+        int tries = 0;
          
-                 connection = DriverManager.getConnection(URL, property_c);
+        while(connection == null || connection.isClosed()) {
+            
+            try {
+                 
+                tries++;
+                System.out.println("Trying to connect to a DB.");
  
-                 if(!connection.isValid(100))
-                 {
-                     connection = null;
-                     throw new SQLException("Connection not Valid");
-                 }
+                Properties property_c = new Properties();
+                property_c.put("user", USER);
+                property_c.put("password", PASSWORD);
+         
+                connection = DriverManager.getConnection(URL, property_c);
+ 
+                if(!connection.isValid(100)) {
+                     
+                    connection = null;
+                    throw new SQLException("Connection not Valid");
+                }
      
              } catch (SQLException e) {
-                 System.out.println("Failed connecting to DB !");
+                 
+                System.out.println("Failed connecting to DB !");
  
-                 if(tries >= 5)
-                 {
-                     connection = null;
-                     throw e;
-                 }
+                if(tries >= 5) {
+                     
+                    connection = null;
+                    throw e;
+                }
  
-                 try {
-                     Thread.sleep(1000);
-                 } catch (InterruptedException e1) {
-                     e1.printStackTrace();
-                 }
-             }  
-             System.out.println("");          
-         }
+                try {
+                    Thread.sleep(1000);
+
+                } catch (InterruptedException e1) {
+                     
+                    e1.printStackTrace();
+                }
+            }  
+            
+            System.out.println("");          
+        }
          
-         return connection;
-     }
+        return connection;
+    }
      
-     public static void Disconnect(){
-         try {
-             if (connection != null && !connection.isClosed()) {
+    public static void Disconnect(){
+        
+        try {
+             
+            if (connection != null && !connection.isClosed()) {
+                
                 connection.close();
-             } 
-         }catch (SQLException e) {
-                 e.printStackTrace();
-             }
-     }
+            } 
+         
+        } catch (SQLException e) {
+                 
+            e.printStackTrace();
+        }
+     
+    }
   
  
- //accounts:
+ // Accounts:
      
-     
+
   /*
    * Create an account into the student DB.
    * 
    * 
    */
-     public static void InsertAccount(String username, String firstname, String lastname, int profilePicID, String email) throws SQLException {
-         System.out.println("");
+    public static void InsertAccount(String username, String firstname, String lastname, int profilePicID, String email) throws SQLException {
+        System.out.println("");
          
-         Statement statement = null;
-         ResultSet result = null;
+        Statement statement = null;
+        ResultSet result = null;
          
-         try {
+        try {
              
-             Connection connection = Connect();
+            Connection connection = Connect();
              
-             String sqlStatement = "INSERT INTO Account(firstname, lastname, username, profilepicID, email)" +
-               "VALUES ('" + firstname + "', '" + lastname + "', '" + username + "', " + profilePicID + ", '" + email + "')"; 	
+            String sqlStatement = "INSERT INTO Account(firstname, lastname, username, profilepicID, email)" +
+                                  "VALUES ('" + firstname + "', '" + lastname + "', '" + username + "', " + 
+                                  profilePicID + ", '" + email + "')"; 	
          
-         statement = connection.createStatement();
-         result = statement.executeQuery(sqlStatement);
+            statement = connection.createStatement();
+            result = statement.executeQuery(sqlStatement);
          
-         if(result != null) {
-             System.out.println("Account successfully added!");
-         }
-         
-         }catch (SQLException exception) {
-             exception.getStackTrace();
-         }finally {
-             if(statement != null) {
-                 statement.close();
-             }
-             if(result != null) {
-                 result.close();
-             }
+            if(result != null) {
              
-         }
-     }
+                System.out.println("Account successfully added!");
+            }
+         
+         } catch (SQLException exception) {
+             
+            exception.getStackTrace();
+         } finally {
+             
+            if(statement != null) {
+                 
+                statement.close();
+            }
+            
+            if(result != null) {
+                 
+                result.close();
+            }
+   
+        }
+    }
  
  /*
   * List all accounts with all of their information 
   * 
-  * 
-  * 
-  * 
-  * 
   */
-     public static void ListAllAccounts() throws SQLException{
-         System.out.println("");
+    public static void ListAllAccounts() throws SQLException{
+        System.out.println("");
          
-         Statement statement = null;
-         ResultSet result = null;
-         try {
+        Statement statement = null;
+        ResultSet result = null;
+        
+        try {
              
-             Connection connection = Connect();
+            Connection connection = Connect();
              
-             String sqlStatement = "SELECT account.name COALESCENE(accounts.email, 'None')" 
-             + "FROM account " 
-             + "ORDER BY account.id ASC";
+            String sqlStatement = "SELECT account.name COALESCENE(accounts.email, 'None') " 
+                                   + "FROM account " 
+                                   + "ORDER BY account.id ASC";
              
-             statement = connection.createStatement();
-             result = statement.executeQuery(sqlStatement);
+            statement = connection.createStatement();
+            result = statement.executeQuery(sqlStatement);
              
-             boolean recordExists = false;
+            boolean recordExists = false;
              
-             while(result != null && result.next()) {
-                 recordExists = true;
-                 System.out.println("Account First Name: " + result.getString("name"));
-                 System.out.println("Email Address: " + result.getString("email"));
-                 System.out.println("");
-             }
+            while(result != null && result.next()) {
+                 
+                recordExists = true;
+                System.out.println("Account First Name: " + result.getString("name"));
+                System.out.println("Email Address: " + result.getString("email"));
+                System.out.println("");
+            }
              
-             if(!recordExists) {
-                 System.out.println("No Account is found!");
-                 System.out.println("");
-             }
-         }catch (SQLException exception) {
-             exception.getStackTrace();
-         }finally {
-             if(statement != null) {
-                 statement.close();
-             }
-             if(result != null) {
-                 result.close();
-             }
+            if(!recordExists) {
+                
+                System.out.println("No Account is found!");
+                System.out.println("");
+            }
+        } catch (SQLException exception) {
              
-         }
-     }
+            exception.getStackTrace();
+
+         } finally {
+             
+            if(statement != null) {
+                 
+                statement.close();
+            }
+             
+            if(result != null) {
+                 
+                result.close();
+            }
+        }
+    }
      
  /*
   * List all subscribers and their emails per account.
-  * 
-  * 
-  * 
-  * 
-  * 
+  *
+  *
   */
      
   /*
    * Add new Movies to the database  
    */
-     public static void InsertMovies(String type, String synopsis, String directorFirstName, String directorLastName, Timestamp runtime) throws SQLException {
-         System.out.println("");
+    public static void InsertMovies(String type, String synopsis, String directorFirstName, String directorLastName, Timestamp runtime) throws SQLException {
+        
+        System.out.println("");
          
-         Statement statement = null;
-         ResultSet result = null;
+        Statement statement = null;
+        ResultSet result = null;
          
-         try {
+        try {
              
-             Connection connection = Connect();
+            Connection connection = Connect();
              
-             String sqlStatement = "SELECT *" +
+            String sqlStatement = "SELECT *" +
                                    "FROM movie" +
                                    "WHERE type = " + type +
                                    "AND synopsis = " + synopsis;
-             statement = connection.createStatement();
-             result = statement.executeQuery(sqlStatement);
+            statement = connection.createStatement();
+            result = statement.executeQuery(sqlStatement);
              
-         if(result != null && result.next()) {
-             System.out.println("Input movie already exist!");
-             System.out.println("");
-             return;
-         }
+            if(result != null && result.next()) {
+            
+                System.out.println("Input movie already exist!");
+                System.out.println("");
+                return;
+            }
          
-         if(statement != null) {
-             statement.close();
-         }
-         if(result != null) {
-             result.close();
-         }
-         sqlStatement = "INSERT INTO movies(type, synopsis, firstname, lastname, runtime)" +
-               "VALUES (" + type + ", " + synopsis + ", " + directorFirstName + ", " + directorLastName + ", " + runtime + ")"; 	
+            if(statement != null) {
+                
+                statement.close();
+            }
+            
+            if(result != null) {
+                result.close();
+            }
+
+            sqlStatement = "INSERT INTO movies(type, synopsis, firstname, lastname, runtime)" +
+                           "VALUES (" + type + ", " + synopsis + ", " + directorFirstName + ", " + directorLastName + ", " + runtime + ")"; 	
          
-         statement = connection.createStatement();
-         result = statement.executeQuery(sqlStatement);
+            statement = connection.createStatement();
+            result = statement.executeQuery(sqlStatement);
          
-         if(result != null) {
-             System.out.println("Movie successfully added!");
-         }
+            if(result != null) {
+             
+                System.out.println("Movie successfully added!");
+            }
          
-         }catch (SQLException exception) {
-             exception.getStackTrace();
-         }finally {
-             if(statement != null) {
-                 statement.close();
-             }
+        } catch (SQLException exception) {
+             
+            exception.getStackTrace();
+
+         } finally {
+             
+            if(statement != null) {
+                 
+                statement.close();
+            }
+             
              if(result != null) {
-                 result.close();
-             }
-             
-         }
-     }
+                 
+                result.close();
+            }
+           
+        }
+    }
      
  /*
   * Insert new profile picture to the database
   * 
   * 
   */ 
-     public static void InsertProfilePicture(String path) throws SQLException {
-         System.out.println("");
+    public static void InsertProfilePicture(String path) throws SQLException {
+        
+        System.out.println("");
          
-         Statement statement = null;
-         ResultSet result = null;
+        Statement statement = null;
+        ResultSet result = null;
          
-         try {
+        try {
              
-             Connection connection = Connect();
+            Connection connection = Connect();
              
-             String sqlStatement = "SELECT *" +
+            String sqlStatement = "SELECT *" +
                                    "FROM ProfilePicture" +
                                    "WHERE picture = " + path;
-             statement = connection.createStatement();
-             result = statement.executeQuery(sqlStatement);
+            statement = connection.createStatement();
+            result = statement.executeQuery(sqlStatement);
              
-         if(result != null && result.next()) {
-             System.out.println("Input profile picture already exist!");
-             System.out.println("");
-             return;
-         }
-         
-         if(statement != null) {
-             statement.close();
-         }
-         if(result != null) {
-             result.close();
-         }
-         sqlStatement = "INSERT INTO ProfilePictures(picture)" +
-                         "VALUES(" + path + ")";
-         
-         statement = connection.createStatement();
-         result = statement.executeQuery(sqlStatement);
-         
-         if(result != null) {
-             System.out.println("Profile Picture successfully added!");
-         }
-         
-         }catch (SQLException exception) {
-             exception.getStackTrace();
-         }finally {
-             if(statement != null) {
+            if(result != null && result.next()) {
+                
+                System.out.println("Input profile picture already exist!");
+                System.out.println("");
+                
+                return;
+            }
+            
+            if(statement != null) {
+                
+                statement.close();
+            }
+            if(result != null) {
+                
+                result.close();
+            }
+            
+            sqlStatement = "INSERT INTO ProfilePictures(picture)" +
+                            "VALUES(" + path + ")";
+            
+            statement = connection.createStatement();
+            result = statement.executeQuery(sqlStatement);
+            
+            if(result != null) {
+                
+                System.out.println("Profile Picture successfully added!");
+            }
+            
+        } catch (SQLException exception) {
+                
+                exception.getStackTrace();
+
+        }finally {
+                
+            if(statement != null) {
+                    
                  statement.close();
-             }
-             if(result != null) {
+            }
+            if(result != null) {
+                    
                  result.close();
-             }
-             
-         }
-     }
-     
- //Genres:
-     
- /*
- * Insert new Genre to the database
- * 
- * 
- */ 
-         public static void InsertGenre(String name) throws SQLException {
-             System.out.println("");
-             
-             Statement statement = null;
-             ResultSet result = null;
-             
-             try {
-                 
-                 Connection connection = Connect();
-                 
-                 String sqlStatement = "SELECT *" +
-                                       "FROM Genre" +
-                                       "WHERE name = '" + name + "'";
-                 statement = connection.createStatement();
-                 result = statement.executeQuery(sqlStatement);
-                 
-             if(result != null && result.next()) {
-                 System.out.println("Input profile picture already exist!");
-                 System.out.println("");
-                 return;
-             }
-             
-             if(statement != null) {
-                 statement.close();
-             }
-             if(result != null) {
-                 result.close();
-             }
-             sqlStatement = "INSERT INTO Genre(name)" +
-                             "VALUES( '" + name + "')";
-             
-             statement = connection.createStatement();
-             result = statement.executeQuery(sqlStatement);
-             
-             if(result != null) {
-                 System.out.println("Movie successfully added!");
-             }
-             
-             }catch (SQLException exception) {
-                 exception.getStackTrace();
-             }finally {
-                 if(statement != null) {
-                     statement.close();
-                 }
-                 if(result != null) {
-                     result.close();
-                 }
-                 
-             }
-         }
-        
- //reviews
-         
-public static void shareReview(final String email) {
-             
-         }
-         
- //viewing parties:
-
-// Genre
-/* Display a list of all the genres in the database
- *
- * @ author Shaun Cushman
- */
-
- public static void listAllGenres() throws SQLException { // UNTESTED
-
-    Statement statement = null;
-    ResultSet resultSet = null;
-
-    try {
-
-        // Open Connection
-        Connection connection = getConnection();
-
-        // Create Query
-        String sql = "SELECT G.name FROM Genre AS G ORDER BY G.name DESC";
-
-        // Initialize Nessecary SQL Objects
-        statement = connection.createStatement();
-        resultSet = statement.executeQuery(sql);
-
-        boolean successful_q = false;
-
-        // Display All Elements in the ResultSet 
-        while (resultSet != null && resultSet.next()) {
-
-            successful_q = true;
-
-            System.out.println("Name: " + resultSet.getString("name"));
+            }
         }
-
-        // If there we no elements matching the query
-        if (successful_q == false) {
-
-            System.out.println("No Records Matching the Query");
-        }
-    } catch (SQLException e) {
-
-        e.printStackTrace();
     }
 
-    // Release SQL Objects
-    statement.close();
-    resultSet.close();
-}
+    // Reviews
+         
+    public static void shareReview(final String email) {
+             
+    }
+         
+    // Viewing Parties:
 
-public static void listAllMoviesPerGenre(String user_input) throws SQLException { // UNTESTED
+    // Genre
 
-    /* Display a list of all the genres in the database
+   /** 
+    * Display a list of all the genres in the database
+    *
+    * @author Shaun Cushman
+    */
+
+    public static boolean createGenre(String user_input) throws SQLException { // UNTESTED
+
+        // Initializae SQL Objects
+        PreparedStatement p_statement = null;
+        ResultSet resultSet = null;
+
+        try {
+
+            // Open Connection
+            Connection connection = getConnection();
+
+            // Create Query
+            String query = "INSERT INTO Genre(name) 
+                            VALUES (?)";
+
+            // Assign Nessecary SQL Objects
+            p_statement = connection.prepareStatment(query);
+            p_statement.setString(1, userInput[0]); // Whatever the passed in Genre name is 
+            resultSet = statement.executeQuery(query);
+
+            int success = p_statement.executeUpdate();
+
+            if (success > 0) {
+
+                System.out.println("Insertion of New Genre Succesful");
+
+                return true;
+            } else {
+
+                System.out.println("Insertion of New Genre Not Succesful");
+
+                return false;
+            }
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+
+        } finally {
+
+            // Release SQL Objects
+            p_statement.close();
+            resultSet.close();
+        }
+    }
+
+    /** 
+    * Display a list of all the genres in the database
     *
     * @ author Shaun Cushman
     */
 
-    // Initializae SQL Objects
-    PreparedStatement p_statement = null;
-    ResultSet resultSet = null;
+    public static void listAllMoviesPerGenre(String user_input) throws SQLException { // UNTESTED
 
-    try {
+        // Initializae SQL Objects
+        PreparedStatement p_statement = null;
+        ResultSet resultSet = null;
 
-        // Open Connection
-        Connection connection = getConnection();
+        try {
 
-        // Create Query
-        String sql = "SELECT M.title " +
-                     "FROM Movie AS M " +
-                     "JOIN MovieToGenre AS MTG ON (M.id = MTG.movieID) " +
-                     "WHERE MTG.GenreID = (" +
-                                          "SELECT G.ID " +
-                                          "FROM Genre AS G " +
-                                          "WHERE G.name = ? " +
-                                          ") " +
-                    "ORDER BY M.title;";
+            // Open Connection
+            Connection connection = getConnection();
 
-        // Assign Nessecary SQL Objects
-        p_statement = connection.prepareStatment(sql);
-        p_statement.setString(1, userInput[0]) // Whatever the requested Genre name is 
-        resultSet = statement.executeQuery(sql);
+            // Create Query
+            String query = "SELECT M.title " +
+                           "FROM Movie AS M " +
+                           "JOIN MovieToGenre AS MTG ON (M.id = MTG.movieID) " +
+                           "WHERE MTG.GenreID = (" +
+                                            "SELECT G.ID " +
+                                            "FROM Genre AS G " +
+                                            "WHERE G.name = ? " +
+                                            ") " +
+                        "ORDER BY M.title";
 
-        boolean successful_q = false;
+            // Assign Nessecary SQL Objects
+            p_statement = connection.prepareStatment(query);
+            p_statement.setString(1, userInput[0]) // Whatever the requested Genre name is 
+            resultSet = statement.executeQuery(query);
 
-        // Display All Elements in the ResultSet 
-        while (resultSet != null && resultSet.next()) {
+            boolean successful_q = false;
 
-            successful_q = true;
+            // Display All Elements in the ResultSet 
+            while (resultSet != null && resultSet.next()) {
 
-            System.out.println("Movie Title: " + resultSet.getString("title"));
+                successful_q = true;
+
+                System.out.println("Movie Title: " + resultSet.getString("title"));
+            }
+
+            // If there we no elements matching the query
+            if (successful_q == false) {
+
+                System.out.println("No Records Matching the Query");
+            }
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+        } finally {
+
+            // Release SQL Objects
+            p_statement.close();
+            resultSet.close();
         }
-
-        // If there we no elements matching the query
-        if (successful_q == false) {
-
-            System.out.println("No Records Matching the Query");
-        }
-    } catch (SQLException e) {
-
-        e.printStackTrace();
     }
 
-    // Release SQL Objects
-    p_statement.close();
-    resultSet.close();
+    // Actors
 
-}
+    /**
+      * Creates a new Actor and adds it to the DB
+      *
+      *@ author: Shaun Cushman
+      */
 
-/* Displays a genre name and its average rating score
- *
- * @ author Shaun Cushman
- */
+    public static boolean createActor(String[] user_input) throws SQLException { // UNTESTED
 
-public static void listMostEnjoyedGenre() throws SQLException // UNTESTED
+        // Initializae SQL Objects
+        PreparedStatement p_statement = null;
+        ResultSet resultSet = null;
 
-    Statement statement = null;
-    ResultSet resultSet = null;
+        try {
 
-    try {
+            // Open Connection
+            Connection connection = getConnection();
 
-        // Open Connection
-        Connection connection = getConnection();
+            // Create Query
+            String query = "INSERT INTO Actor(firstName, lastName) 
+                            VALUES (?, ?)";
 
-        // Create Query
-        String sql = "SELECT G.name, ROUND(AVG(table1.rating), 2) AS avgRating
-                      FROM Genre AS G
-                      JOIN MoviesToGenre AS MTG ON (G.ID = MTG.GenreID)
-                      JOIN (
-                            SELECT R.MovieID, R.rating
-                            FROM Rating AS R
-                           ) AS table1 ON (MTG.MovieID = table1.movieID)
-                      GROUP BY G.name
-                      ORDER BY avgRating ASC;
-                      LIMIT 1;
-                     ";
+            // Assign Nessecary SQL Objects
+            p_statement = connection.prepareStatment(query);
+            p_statement.setString(1, userInput[1]); // Whatever the passed in firstName
+            p_statement.setString(2, userInput[2]); // Whatever the passed in firstName
+            
+            resultSet = statement.executeQuery(query);
 
-        // Initialize Nessecary SQL Objects
-        statement = connection.createStatement();
-        resultSet = statement.executeQuery(sql);
+            int success = p_statement.executeUpdate();
 
-        boolean successful_q = false;
+            if (success > 0) {
 
-        // Display All Elements in the ResultSet 
-        while (resultSet != null && resultSet.next()) {
+                System.out.println("Insertion of New Actor Succesful");
 
-            successful_q = true;
+                return true;
+            } else {
 
-            System.out.println("Name: " + resultSet.getString("name") + 
-                               "  AVG Rating: " + resultSet.getString("avgRating")
-                              );
+                System.out.println("Insertion of New Actor Not Succesful");
+
+                return false;
+            }
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+
+        } finally {
+
+            // Release SQL Objects
+            p_statement.close();
+            resultSet.close();
         }
-
-        // If there were no elements matching the query
-        if (successful_q == false) {
-
-            System.out.println("No Records Matching the Query");
-        }
-    } catch (SQLException e) {
-
-        e.printStackTrace();
     }
 
-    // Release SQL Objects
-    statement.close();
-    resultSet.close();
-}
+    /**
+      * Lists all the movie title associated w/ a specific actor
+      *
+      *@ author: Shaun Cushman
+      */
 
-/* Displays a genre name and its average rating score
- *
- * @ author Shaun Cushman
- */
+    public static void listAllActorsMovies(String[] user_input) throws SQLException { // UNTESTED
 
-public static void listLeastEnjoyedGenre() throws SQLException // UNTESTED
+        // Initializae SQL Objects
+        PreparedStatement p_statement = null;
+        ResultSet resultSet = null;
 
-    Statement statement = null;
-    ResultSet resultSet = null;
+        try {
 
-    try {
+            // Open Connection
+            Connection connection = getConnection();
 
-        // Open Connection
-        Connection connection = getConnection();
+            // Create Query
+            String query = "SELECT M.title " +
+                           "FROM Movie AS M " +
+                           "JOIN MovieToActors AS MTA ON (M.id = MTA.movieID) " +
+                           "WHERE MTA.ActorID = (" +
+                                            "SELECT A.ID " +
+                                            "FROM Actor AS A " +
+                                            "WHERE A.fistName = ? AND A.lastName = ? " +
+                                            ") " +
+                        "ORDER BY M.title";
 
-        // Create Query
-        String sql = "SELECT G.name, ROUND(AVG(table1.rating), 2) AS avgRating
-                      FROM Genre AS G
-                      JOIN MoviesToGenre AS MTG ON (G.ID = MTG.GenreID)
-                      JOIN (
-                            SELECT R.MovieID, R.rating
-                           FROM Rating AS R
-                       ) AS table1 ON (MTG.MovieID = table1.movieID)
-                       GROUP BY G.name
-                       ORDER BY avgRating ASC;
-                       LIMIT 1;
-                     ";
+            // Assign Nessecary SQL Objects
+            p_statement = connection.prepareStatment(query);
+            p_statement.setString(1, userInput[1]) // Whatever the requested Actors firstName is 
+            p_statement.setString(2, userInput[2]) // Whatever the requested Actors firstName is 
+            
+            resultSet = statement.executeQuery(query);
 
-        // Initialize Nessecary SQL Objects
-        statement = connection.createStatement();
-        resultSet = statement.executeQuery(sql);
+            boolean successful_q = false;
 
-        boolean successful_q = false;
+            // Display All Elements in the ResultSet 
+            while (resultSet != null && resultSet.next()) {
 
-        // Display All Elements in the ResultSet 
-        while (resultSet != null && resultSet.next()) {
+                successful_q = true;
 
-            successful_q = true;
+                System.out.println("Movie Title: " + resultSet.getString("title"));
+            }
 
-            System.out.println("Name: " + resultSet.getString("name") + 
-                               "  AVG Rating: " + resultSet.getString("avgRating")
-                              );
+            // If there we no elements matching the query
+            if (successful_q == false) {
+
+                System.out.println("No Records Matching the Query");
+            }
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+        } finally {
+
+            // Release SQL Objects
+            p_statement.close();
+            resultSet.close();
         }
-
-        // If there we no elements matching the query
-        if (successful_q == false) {
-
-            System.out.println("No Records Matching the Query");
-        }
-    } catch (SQLException e) {
-
-        e.printStackTrace();
     }
+
+
+
+
+

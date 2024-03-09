@@ -5,41 +5,41 @@
  * @version 3/8/2024
  */
 
- import java.sql.SQLException;
+import java.sql.SQLException;
 
- public class Genre {
+public class Genre {
  
-     public static final String cmdListAllGenres = "listAllGenres"
-     public static final String cmdListAllMoviesPerGenre = "listAllMoviesPerGenre"
-     public static final String cmdListMostEnjoyedGenre = "listMostEnjoyedGenre"
-     public static final String cmdListLeastEnjoyedGenre = "listLeastEnjoyedGenre"
- 
-     /**
-      * Lists all the avialable Genres for movies
+    public static final String createGenre = "createGenre";
+    public static final String listAllMoviesPerGenre = "listAllMoviesPerGenre";
+
+    /**
+      * Creates a new Genre and adds it to the DB
       *
       * @author: Shaun Cushman
       */
- 
-     public static void listAllGenres(String[] user_input) {
- 
-         if (user_input == null) {
- 
-             // Print detailed explanation of the API
-             System.out.println("listAllGenres - Returns a list of all the genres in the database");
-             System.out.println("Command: listAllGenres");
 
-         } else {
+    public static boolean createGenre(String [] user_input) {
+
+        if (user_input == null) {
  
-            try {
+            // Print detailed explanation of the API
+            System.out.println("createNewGenre - creates a new genre and adds it the DB");
+            System.out.println("Command: createNewGenre <Genre Name>");
 
-                MovieDB.listAllGenres();
+        } else { 
+            
+            // Execute API
 
-            } catch (SQLException e) {
+           try {
+
+            return MovieDB.createNewGenre(user_input);
+
+           } catch (SQLException e) {
 
                 e.printStackTrace();
-            }
-         }
-     }
+           }
+        }
+    }
 
      /**
       * Lists all the Movies asscoiated w/ a Genre
@@ -47,7 +47,7 @@
       * @author: Shaun Cushman
       */
 
-     public static void listAllMoviesPerGenre(String [] user_input) {
+    public static void listAllMoviesPerGenre(String [] user_input) {
 
         if (user_input == null) {
  
@@ -59,71 +59,14 @@
             
             // Execute API
 
-           try {
+            try {
 
                 MovieDB.listAllMoviePerGenre(user_input);
 
-           } catch (SQLException e) {
+            } catch (SQLException e) {
 
-               e.printStackTrace();
+                e.printStackTrace();
            }
         }
-     }
- 
-     /**
-      * Lists the genre with the highest average rating score associated w/ their movies
-      *
-      * @author: Shaun Cushman
-      */
-     public static void listMostEnjoyedGenre(String[] user_input) {
- 
-         if (user_input == null) {
- 
-             // Display explanation of the APIs purpose
-             System.out.println("listMostEnjoyedGenre - Lists the name of the genre w/ the highest average rating 
-                                 score associated w/ their movies, and their avg score");
-             
-             System.out.println("Command: listMostEnjoyedGenre")
-
-         } else {
- 
-            try {
-
-                MovieDB.listMostEnjoyedGenre();
-
-            } catch (SQLException e) {
-
-                e.printStackTrace();
-            }
-         }
-     }
- 
-     /**
-      * Lists the genre with the lowest average rating score associated w/ their movies
-      *
-      * @author: Shaun Cushman
-      */
-     public static void listLeastEnjoyedGenre(String[] user_input) {
- 
-        if (user_input == null) {
- 
-            // Display detailed explanation of APIs purpose
-            System.out.println("listLeastEnjoyedGenre - Lists the name of the genre w/ the lowest average rating score associated 
-                                w/ their movies, and their avg score");
-
-            System.out.println("Command: listLeastEnjoyedGenre");
-        } else {
-            
-            // Execute API
-
-            try {
-
-                MovieDB.listLeastEnjoyedGenre();
-
-            } catch (SQLException e) {
-
-                e.printStackTrace();
-            }
-        }
-     }
- }
+    }
+}

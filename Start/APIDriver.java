@@ -213,27 +213,23 @@ private static void callGenreAPIs(null) {
     switch (user_input[1]) {
 
         // Each API has their own case
-        case Genre.cmdListAllGenres:
+        case Genre.ListAllGenres:
         Genre.listAllGenres(...);
         break;
 
-        case Genre.cmdListAllMoviesPerGenre:
-        Genre.listAllMoviesPerGenre(...)
-        
-        case Genre.cmdListMostEnjoyedGenre:
-        Genre.listMostEnjoyedGenre(...);
+        case Genre.CreateNewGenre:
+        Genre.createNewGenre(...);
         break;
-            
-        case Genre.cmdListLeastEnjoyedGenre:
-        Genre.listLeastEnjoyedGenre(...);
+
+        case Genre.ListAllMoviesPerGenre:
+        Genre.listAllMoviesPerGenre(...)
         break;
 
         // Call everything
         default: 
         
         Genre.listAllGenres(null);
-        Genre.listAllMoviesPerGenre(null);
-        Genre.listMostEnjoyedGenre(null);
+        Genre.createNewGenre(null);
         Genre.listLeastEnjoyedGenre(null);
     }
 }
