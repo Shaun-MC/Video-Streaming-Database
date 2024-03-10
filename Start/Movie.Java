@@ -5,12 +5,11 @@
  * @version 3/8/2024
  */
 
- import java.sql.SQLException;
+import java.sql.SQLException;
 
- public class Movie {
+public class Movie {
  
     public static final String createMovie = "createMovie";
-    public static final String listAllMovies = "listAllMovies";
 
     /**
       * Creates a new Movie and adds it to the DB

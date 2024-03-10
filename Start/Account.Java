@@ -2,12 +2,12 @@
  * CSS 475 Team Project
  * @ team Team Spongebob
  * @ authors Shaun Cushman, Shyam Ramesh, Mike Chen, Chirs Chen
- * @ version 3/8/2024
+ * @version 3/8/2024
  */
 
- import java.sql.SQLException;
+import java.sql.SQLException;
 
- public class Actor {
+public class Actor {
   
     public static final String createAccount = "createAccount";
 

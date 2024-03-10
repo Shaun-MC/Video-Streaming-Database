@@ -105,7 +105,6 @@ class APIDriver {
 
             // Call everything
             default: 
-
             Account.createAccount(user_input);
             Account.inviteAccount(user_input);
         }
@@ -118,19 +117,12 @@ class APIDriver {
         switch (user_input[1]) {
 
             // Each API has their own case
-            /*case: 
-                
-            case: 
-        
-            case: 
-        
-            case: 
-        
-            case: */
-            
+            case Movie.createMovie:
+            Movie.createMovie(user_input);
+                 
             // Call everything
             default: 
-        
+            Movie.createMovie(null);
         }
     }
 
@@ -273,14 +265,30 @@ private static void callActorAPIs(String[] user_input) { // LIST COMPLETE
         }
     }
 
-    
+    private static void callAttendeesAPIs(String[] user_input) {
+
+        // user_input == the specific API desired to be called or nothing
+            // In the nothing case - call all the API for their descriptions
+            switch (user_input[1]) {
+
+                // Each API has their own case
+                case Attendees.createDirector: 
+                Director.createDirector(user_input);
+                break;
+                
+                // Call everything
+                default: 
+                Director.createDirector(null);
+            }
+
+    }
 
     private static void ListOfAPIs() { // DONE
 
         String[] temp = {"X", "X"}; // Engineer Fix
        
         // Calls all the currently available APIs
-        APIDriver.callAccountAPIs(temp);
+        APIDriver.callAccountAPIs(temp); // UNTESTED - Complete List
 
         APIDriver.callMovieAPIs(temp); // UNTESTED - Complete List
 
@@ -295,5 +303,7 @@ private static void callActorAPIs(String[] user_input) { // LIST COMPLETE
         APIDriver.callProfilePictureAPIs(temp); // UNTESTED - Complete List
 
         APIDriver.callDirectorAPIs(temp); // UNTESTED - Complete List
+
+        APIDriver.callAttendeesAPIs(temp);
     }
 }

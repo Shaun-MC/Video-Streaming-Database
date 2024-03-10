@@ -1,8 +1,8 @@
 /**
  * CSS 475 Team Project
- * @ team Team Spongebob
+ * @team Team Spongebob
  * @ authors Shaun Cushman, Shyam Ramesh, Mike Chen, Chirs Chen
- * @ version 3/8/2024
+ * @version 3/8/2024
  */
 
 import java.sql.SQLException;

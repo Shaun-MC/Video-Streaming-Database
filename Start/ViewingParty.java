@@ -4,15 +4,16 @@
  * @ authors Shaun Cushman, Shyam Ramesh, Mike Chen, Chirs Chen
  * @ version 3/10/2024
  */
-import java.sql.SQLException;
 
-public class ViewingParty{
+ import java.sql.SQLException;
 
-public static final String createViewingParty = "createViewingParty";
-public static final String joinViewingParty = "joinViewingParty";
-public static final String updateViewingPartyMovie = "updateViewingPartyMovie";
+ public class ViewingParty{
 
-    public static boolean createViewingParty(String [] user_input) {
+    public static final String createViewingParty = "createViewingParty";
+    public static final String joinViewingParty = "joinViewingParty";
+    public static final String updateViewingPartyMovie = "updateViewingPartyMovie";
+
+    public static void createViewingParty(String[] user_input) {
 
         if (user_input == null) {
  
@@ -24,18 +25,18 @@ public static final String updateViewingPartyMovie = "updateViewingPartyMovie";
             
             // Execute API
 
-           try {
+           /*try {
 
             MovieDB.createViewingParty(user_input);
 
            } catch (SQLException e) {
 
                 e.printStackTrace();
-           }
+           }*/
         }
 	}
 
-  public static boolean joinViewingParty(String [] user_input) {
+    public static void joinViewingParty(String[] user_input) {
 
         if (user_input == null) {
  
@@ -47,18 +48,18 @@ public static final String updateViewingPartyMovie = "updateViewingPartyMovie";
             
             // Execute API
 
-           try {
+           /*try {
 
             MovieDB.joinViewingParty(user_input);
 
            } catch (SQLException e) {
 
                 e.printStackTrace();
-           }
+           }*/
         }
-  }
+    }
 		
-	public static boolean updateViewingPartyMovie(String [] user_input){
+	public static void updateViewingPartyMovie(String [] user_input){
 		if (user_input == null) {
  
             // Print detailed explanation of the API
@@ -67,13 +68,14 @@ public static final String updateViewingPartyMovie = "updateViewingPartyMovie";
 
         } else { 
 		
-			try{
-			MovieDB.updateViewingPartyMovie(user_input);
+		    /*try{
+			
+            MovieDB.updateViewingPartyMovie(user_input);
 
-           } catch (SQLException e) {
+            } catch (SQLException e) {
 
                 e.printStackTrace();
-           }
+            }*/
 		}
 	}
- }
+}
