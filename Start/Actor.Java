@@ -5,7 +5,7 @@
  * @ version 3/8/2024
  */
 
- import java.sql.SQLException;
+import java.sql.SQLException;
 
  public class Actor {
   

@@ -1,4 +1,13 @@
-public class Genre {
+/**
+ * CSS 475 Team Project
+ * @ team Team Spongebob
+ * @ authors Shaun Cushman, Shyam Ramesh, Mike Chen, Chirs Chen
+ * @ version 3/8/2024
+ */
+
+import java.sql.SQLException;
+
+public class Director {
  
     public static final String createDirector = "createGenre";
     public static final String listAllDirectors = "listAllDirectors";
@@ -15,7 +24,7 @@ public class Genre {
  
             // Print detailed explanation of the API
             System.out.println("createDirector - creates a new Director and adds it the DB");
-            System.out.println("Command: createDirector <Director Name>");
+            System.out.println("Command: createDirector <firstName> <lastName");
 
         } else { 
             
@@ -26,35 +35,6 @@ public class Genre {
             MovieDB.createDirector(user_input);
 
            } catch (SQLException e) {
-
-                e.printStackTrace();
-           }
-        }
-    }
-
-     /**
-      * Lists all the Directors
-      *
-      * @author: Shyam Ramesh
-      */
-
-    public static void listAllDirectors(String [] user_input) {
-
-        if (user_input == null) {
- 
-            // Print detailed explanation of the API
-            System.out.println("listAllDirectors - Returns a list of all the directors");
-            System.out.println("Command: listAllDirectors <Director Name>");
-
-        } else { 
-            
-            // Execute API
-
-            try {
-
-                MovieDB.listAllDirectors(user_input);
-
-            } catch (SQLException e) {
 
                 e.printStackTrace();
            }

@@ -18,7 +18,7 @@ public class Genre {
       * @author: Shaun Cushman
       */
 
-    public static boolean createGenre(String [] user_input) {
+    public static void createGenre(String[] user_input) {
 
         if (user_input == null) {
  
