@@ -87,6 +87,11 @@ class APIDriver {
                 APIDriver.callActorAPIs(commands);
                 break;
 
+                case "D":
+                case "d":
+                APIDriver.callAccountAPIs(commands);
+                break;
+
                 default:
                 System.out.println("MSPlatform: API Type Not Recognized. Try Again.");
             }

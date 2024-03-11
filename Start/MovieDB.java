@@ -8,15 +8,13 @@
 
 import java.sql.*;
 import java.util.Properties;
-
-//import javax.naming.spi.DirStateFactory.Result;
  
 public class MovieDB {
      
     // JDBC URL, username, and password of PostgreSQL server
-    private static final String URL = "jdbc:postgresql://localhost:5432/data1"; 
+    private static final String URL = "jdbc:postgresql://localhost/data1.txt"; 
     private static final String USER = "postgres";
-    private static final String PASSWORD = "Minutemankeymethod1547!%";
+    private static final String PASSWORD = ""; // Local password
     private static Connection connection = null;
     
     // Functions:
@@ -324,8 +322,6 @@ public class MovieDB {
         }
     }
 
-
-
     // ---------------------------------------------------------------------------------------------------------
     // Reviews
     // ---------------------------------------------------------------------------------------------------------
@@ -417,13 +413,16 @@ public class MovieDB {
             Connection connection = Connect();
 
             // Create Query
-            String query = "SELECT (SELECT A.email FROM Account AS A WHERE A.userName = ?) AS From_email, (SELECT A.email FROM Account AS A WHERE A.userName = ?) as To_email, " +
+            String query = "SELECT (SELECT A.email FROM Account AS A WHERE A.userName = ?) AS From_email, " +
+                                   "(SELECT A.email FROM Account AS A WHERE A.userName = ?) as To_email, " +
                                     "R.ID AS reviewNum " +
                            "FROM Account AS A " +
                            "JOIN Review AS R ON (A.id = R.reviewID) " +
                            "WHERE R.MovieID = ( SELECT M.ID " +
                                                 "FROM Movie AS M " +
-                                                "WHERE M.title = ? AND M.directorID = (SELECT D.ID FROM Director AS D WHERE D.firstName = ? AND D.lastName = ?)";
+                                                "WHERE M.title = ? AND " + 
+                                                       "M.directorID = (SELECT D.ID FROM Director AS D " +
+                                                                       "WHERE D.firstName = ? AND D.lastName = ?)";
                         
         
 
@@ -442,7 +441,7 @@ public class MovieDB {
 
             resultSet = p_statement.executeQuery(query);
 
-            if (resultSet != null && resultSet.next()) { // Ternary Operator Use Case
+            if (resultSet != null && resultSet.next()) { 
 
                 successful_q = true;
 

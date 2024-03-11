@@ -21,7 +21,7 @@
             
             // Print detailed explanation of the API
             System.out.println("createViewingParty - creates a viewing party and adds it the DB");
-            System.out.println("Command: createViewingParty <title> <movie title> <director_firstName> <is_active>");
+            System.out.println("Command: <VP> createViewingParty <title> <movie title> <director_firstName> <is_active>");
 
             System.out.println("");
         } else { 

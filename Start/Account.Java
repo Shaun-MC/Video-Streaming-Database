@@ -26,7 +26,7 @@ public class Account {
 
             // Print detailed explanation of the API
             System.out.println("createAccount - creates an Account and adds them to the DB");
-            System.out.println("Command: createAccount <ProfilePicID> <firstName> <lastName> <userName> <email>");
+            System.out.println("Command: <A> createAccount <ProfilePicID> <firstName> <lastName> <userName> <email>");
 
             System.out.println("");
 
@@ -52,7 +52,7 @@ public class Account {
  
             // Print detailed explanation of the API
             System.out.println("listAccountInfo - lists all the account usernames and emails");
-            System.out.println("Command: listAccountInfo <'Z'>");
+            System.out.println("Command: <A> listAccountInfo <'Z'>");
 
             System.out.println("");
 
