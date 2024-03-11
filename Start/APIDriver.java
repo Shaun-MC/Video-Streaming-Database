@@ -18,7 +18,8 @@ class APIDriver {
         System.out.println("---Movie Streaming Platform---");
         System.out.println("Input 'L' to list all the available APIs and their required input. (Case Insensitive)");
         System.out.println("Input 'E' to exit the program. (Case Insensitive) ");
-        System.out.println("Input An API Name and Assciated Input to Execute That API. (Case Sensitive)");
+        System.out.println("Input 'H' to get a list of API prefixes");
+        System.out.println("Input An API Prefix, Name and associated Input to Execute That API. (Case Sensitive)");
 
         String user_input = "";
         
@@ -35,12 +36,16 @@ class APIDriver {
 
                 case "L":
                 case "l": 
-                ListOfAPIs();
+                APIDriver.ListOfAPIs();
                 break;
 
                 case "E":
                 case "e":
                 break;
+
+                case "H":
+                case "h":
+                APIDriver.ListAPIPrefixes();
 
                 // Account APIs
                 case "A":
@@ -158,7 +163,7 @@ class APIDriver {
         }
     }
 
-private static void callViewingPartyAPIs(String[] user_input) { // LIST COMPLETE
+    private static void callViewingPartyAPIs(String[] user_input) { // LIST COMPLETE
 
     // user_input == the specific API desired to be called or nothing
         // In the nothing case - call all the API for their descriptions
@@ -186,50 +191,50 @@ private static void callViewingPartyAPIs(String[] user_input) { // LIST COMPLETE
     }
 }
 
-private static void callGenreAPIs(String[] user_input) { // LIST DONE
+    private static void callGenreAPIs(String[] user_input) { // LIST DONE
 
-    // user_input == the specific API desired to be called or nothing
-        // In the nothing case - call all the API for their descriptions
-    switch (user_input[1]) {
+        // user_input == the specific API desired to be called or nothing
+            // In the nothing case - call all the API for their descriptions
+        switch (user_input[1]) {
 
-        // Each API has their own case
-        case Genre.createGenre:
-        Genre.createGenre(null);
-        break;
+            // Each API has their own case
+            case Genre.createGenre:
+            Genre.createGenre(null);
+            break;
 
-        case Genre.listAllMoviesPerGenre:
-        Genre.listAllMoviesPerGenre(null);
-        break;
+            case Genre.listAllMoviesPerGenre:
+            Genre.listAllMoviesPerGenre(null);
+            break;
 
-        // Call everything
-        default: 
-        Genre.createGenre(null);
-        Genre.listAllMoviesPerGenre(null);
+            // Call everything
+            default: 
+            Genre.createGenre(null);
+            Genre.listAllMoviesPerGenre(null);
+        }
     }
-}
 
-private static void callActorAPIs(String[] user_input) { // LIST COMPLETE
+    private static void callActorAPIs(String[] user_input) { // LIST COMPLETE
 
-    // user_input == the specific API desired to be called or nothing
-        // In the nothing case - call all the API for their descriptions
-    switch (user_input[1]) {
+        // user_input == the specific API desired to be called or nothing
+            // In the nothing case - call all the API for their descriptions
+        switch (user_input[1]) {
 
-        // Each API has their own case
-        case Actor.createActor:
-        Actor.createActor(user_input);
-        break;
-    
-        case Actor.listActorsMovies:
-        Actor.listAllActorsMovies(user_input);
-        break;
-
-        // Call everything
-        default: 
+            // Each API has their own case
+            case Actor.createActor:
+            Actor.createActor(user_input);
+            break;
         
-        Actor.createActor(null);
-        Actor.listAllActorsMovies(null);
+            case Actor.listActorsMovies:
+            Actor.listAllActorsMovies(user_input);
+            break;
+
+            // Call everything
+            default: 
+            
+            Actor.createActor(null);
+            Actor.listAllActorsMovies(null);
+        }   
     }
-}
 
     private static void callProfilePictureAPIs(String[] user_input) {
 
@@ -305,5 +310,16 @@ private static void callActorAPIs(String[] user_input) { // LIST COMPLETE
         APIDriver.callDirectorAPIs(temp); // UNTESTED - Complete List
 
         APIDriver.callAttendeesAPIs(temp);
+    }
+
+    private static void ListAPIPrefixes() {
+
+        System.out.println("A = Account");
+        System.out.println("PP = ProfilePicuture");
+        System.out.println("M = Movie");
+        System.out.println("R = Review");
+        System.out.println("VP = Viewing Party");
+        System.out.println("G = Genre");
+        System.out.println("ACT = Actor");
     }
 }
