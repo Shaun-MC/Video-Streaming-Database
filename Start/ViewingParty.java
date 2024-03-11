@@ -5,7 +5,7 @@
  * @ version 3/10/2024
  */
 
- import java.sql.SQLException;
+ //import java.sql.SQLException;
 
  public class ViewingParty{
 

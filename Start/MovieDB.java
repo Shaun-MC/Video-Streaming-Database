@@ -9,6 +9,8 @@
 import java.sql.*;
 //import java.util.HashMap;
 import java.util.Properties;
+
+//import javax.naming.spi.DirStateFactory.Result;
  
 public class MovieDB {
      
@@ -97,7 +99,8 @@ public class MovieDB {
    * 
    * @author: Chris Chen
    */
-    public static void insertAccount(String username, String firstname, String lastname, int profilePicID, String email) throws SQLException {
+    public static void createAccount(String username, String firstname, String lastname, int profilePicID, String email) throws SQLException {
+        
         System.out.println("");
          
         Statement statement = null;
@@ -133,9 +136,62 @@ public class MovieDB {
                  
                 result.close();
             }
-   
         }
     }
+
+  /**
+   * Retrieve account information
+   * 
+   * @author: Shaun Cushman
+   */
+
+    public static void listAccountInfo(String[] user_input) throws SQLException {
+
+        // Initializae SQL Objects
+        Statement statement = null;
+        ResultSet resultSet = null;
+
+        try {
+ 
+            // Open Connection
+            Connection connection = Connect();
+ 
+            // Create Query
+            String query = "SELECT A.userName, A.email FROM Account AS A;";
+ 
+            // Assign Nessecary SQL Objects
+            statement = connection.createStatement();
+
+            resultSet = statement.executeQuery(query);
+
+            boolean successful_q = false;
+
+            while (resultSet != null && resultSet.next()) {
+                
+                successful_q = true;
+
+                System.out.println("Username: " + resultSet.getString("userName") +
+                                   " Email: " + resultSet.getString("email"));
+            } 
+
+            if (successful_q == false){
+ 
+                System.out.println("No Records Matching the Query");
+            }
+ 
+        } catch (SQLException e) {
+ 
+            e.printStackTrace();
+ 
+        } finally {
+ 
+            // Release SQL Objects
+            statement.close();
+            resultSet.close();
+        }
+    }
+
+
 
   // ---------------------------------------------------------------------------------------------------------
   // Movie
@@ -209,6 +265,65 @@ public class MovieDB {
            
         }
     }
+
+    /**
+      * Creates a new Review and adds it to the DB
+      *
+      *@ author: Shaun Cushman
+      */
+
+    public static void listMovieInformation(String[] user_input) throws SQLException {
+
+        // Initializae SQL Objects
+        Statement statement = null;
+        ResultSet resultSet = null;
+
+        try {
+ 
+            // Open Connection
+            Connection connection = Connect();
+ 
+            // Create Query
+            String query = "SELECT M.title, M.runTime, D.firstName, D.lastName " + 
+                           "FROM Movie AS M " + 
+                           "JOIN Director AS D ON (M.directorID = D.id) " +
+                           "ORDER BY M.title";
+ 
+            // Assign Nessecary SQL Objects
+            statement = connection.createStatement();
+
+            resultSet = statement.executeQuery(query);
+
+            boolean successful_q = false;
+
+            while (resultSet != null && resultSet.next()) {
+                
+                successful_q = true;
+
+                System.out.println("Title:  " + resultSet.getString("title") + 
+                                   " RunTime: " + resultSet.getString(("runTime")) +
+                                   " Director First Name: " + resultSet.getString("firstName") +
+                                   " Director Last Name: " + resultSet.getString("lastName"));
+            } 
+
+            if (successful_q == false){
+ 
+                System.out.println("No Records Matching the Query");
+            }
+ 
+        } catch (SQLException e) {
+ 
+            e.printStackTrace();
+ 
+        } finally {
+ 
+            // Release SQL Objects
+            statement.close();
+            resultSet.close();
+        }
+    }
+
+
 
     // ---------------------------------------------------------------------------------------------------------
     // Reviews

@@ -7,9 +7,10 @@
 
 import java.sql.SQLException;
 
-public class Actor {
+public class Account {
   
     public static final String createAccount = "createAccount";
+    public static final String listAccountInfo = "listAccountInfo";
 
     /**
       * Creates a new Account and adds it to the DB
@@ -31,12 +32,36 @@ public class Actor {
 
            try {
 
-                MovieDB.createAccount(user_input);
+                MovieDB.createAccount(user_input[2], user_input[3], user_input[4], 
+                                      Integer.parseInt(user_input[5]), user_input[6]);
 
            } catch (SQLException e) {
 
                 e.printStackTrace();
            }
         }
+    }
+
+    public static void listAccountInfo(String[] user_input) {
+
+        if (user_input == null) {
+ 
+            // Print detailed explanation of the API
+            System.out.println("listAccountInfo - lists all the account usernames and emails");
+            System.out.println("Command: listAccountInfo <'Z'>");
+
+        } else { 
+            
+            // Execute API
+
+           try {
+
+                MovieDB.listAccountInfo(user_input);
+
+           } catch (SQLException e) {
+
+                e.printStackTrace();
+           }
+        } 
     }
 }

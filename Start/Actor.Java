@@ -5,7 +5,7 @@
  * @version 3/8/2024
  */
 
-import java.sql.SQLException;
+ import java.sql.SQLException;
 
  public class Actor {
   
@@ -24,7 +24,7 @@ import java.sql.SQLException;
  
             // Print detailed explanation of the API
             System.out.println("createActor - creates an Actor and adds them to the DB");
-            System.out.println("Command: createNewGenre <Actor Fistname> <Actor Lastname>");
+            System.out.println("Command: createActor <Actor Fistname> <Actor Lastname>");
 
         } else { 
             
@@ -32,7 +32,7 @@ import java.sql.SQLException;
 
            try {
 
-                MovieDB.createNewGenre(user_input);
+                MovieDB.createActor(user_input);
 
            } catch (SQLException e) {
 

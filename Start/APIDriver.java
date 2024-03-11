@@ -5,10 +5,10 @@
  * @version 3/8/2024
  */
 
-import java.sql.*;
+//import java.sql.*;
 
-import javax.security.auth.login.AccountException;
-import javax.swing.text.View;
+//import javax.security.auth.login.AccountException;
+//import javax.swing.text.View;
 
 class APIDriver {
 
@@ -32,7 +32,7 @@ class APIDriver {
 
             String[] commands = user_input.split(" ", 2);
 
-            switch (commands[1]) {
+            switch (commands[0]) {
 
                 case "L":
                 case "l": 
@@ -46,6 +46,7 @@ class APIDriver {
                 case "H":
                 case "h":
                 APIDriver.ListAPIPrefixes();
+                break;
 
                 // Account APIs
                 case "A":
@@ -108,10 +109,14 @@ class APIDriver {
             Account.createAccount(user_input);
             break; 
 
+            case Account.listAccountInfo:
+            Account.listAccountInfo(user_input);
+            break;
+
             // Call everything
             default: 
             Account.createAccount(user_input);
-            Account.inviteAccount(user_input);
+            Account.listAccountInfo(user_input);
         }
     }
 
@@ -225,14 +230,14 @@ class APIDriver {
             break;
         
             case Actor.listActorsMovies:
-            Actor.listAllActorsMovies(user_input);
+            Actor.listActorsMovies(user_input);
             break;
 
             // Call everything
             default: 
             
             Actor.createActor(null);
-            Actor.listAllActorsMovies(null);
+            Actor.listActorsMovies(null);
         }   
     }
 
@@ -270,24 +275,6 @@ class APIDriver {
         }
     }
 
-    private static void callAttendeesAPIs(String[] user_input) {
-
-        // user_input == the specific API desired to be called or nothing
-            // In the nothing case - call all the API for their descriptions
-            switch (user_input[1]) {
-
-                // Each API has their own case
-                case Attendees.createDirector: 
-                Director.createDirector(user_input);
-                break;
-                
-                // Call everything
-                default: 
-                Director.createDirector(null);
-            }
-
-    }
-
     private static void ListOfAPIs() { // DONE
 
         String[] temp = {"X", "X"}; // Engineer Fix
@@ -308,12 +295,11 @@ class APIDriver {
         APIDriver.callProfilePictureAPIs(temp); // UNTESTED - Complete List
 
         APIDriver.callDirectorAPIs(temp); // UNTESTED - Complete List
-
-        APIDriver.callAttendeesAPIs(temp);
     }
 
     private static void ListAPIPrefixes() {
 
+        System.out.println("--Prefixes--");
         System.out.println("A = Account");
         System.out.println("PP = ProfilePicuture");
         System.out.println("M = Movie");
@@ -321,5 +307,6 @@ class APIDriver {
         System.out.println("VP = Viewing Party");
         System.out.println("G = Genre");
         System.out.println("ACT = Actor");
+        System.out.println("--End Of Prefixes--");
     }
 }
