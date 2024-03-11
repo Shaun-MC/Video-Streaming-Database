@@ -7,7 +7,7 @@
 
  import java.sql.SQLException;
 
- public class Actor {
+public class Actor {
   
     public static final String createActor = "createActor";
     public static final String listActorsMovies = "listActorsMovies";
@@ -20,15 +20,11 @@
 
     public static void createActor(String[] user_input) {
 
-        if (user_input == null || user_input[0] == "") {
-            
-            System.out.println("--Actor--");
-
+        if (user_input == null) {
+ 
             // Print detailed explanation of the API
             System.out.println("createActor - creates an Actor and adds them to the DB");
-            System.out.println("Command: <ACT> createActor <Actor Fistname> <Actor Lastname>");
-
-            System.out.println("");
+            System.out.println("Command: createNewGenre <Actor Fistname> <Actor Lastname>");
 
         } else { 
             
@@ -53,16 +49,16 @@
 
     public static void listActorsMovies(String[] user_input) {
 
-        if (user_input == null || user_input[0] == "") {
-
+        if (user_input == null) {
+ 
             // Print detailed explanation of the API
             System.out.println("listActorsMovies - lists all the movie title associated w/ a specific actor");
-            System.out.println("Command: <ACT> listActorsMovies <Actor Fistname> <Actor Lastname>");
+            System.out.println("Command: listActorsMovies <Actor Fistname> <Actor Lastname>");
 
-            System.out.println("");
         } else { 
             
             // Execute API
+
            try {
 
                 MovieDB.listActorsMovies(user_input);
