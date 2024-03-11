@@ -28,14 +28,14 @@
             
             // Execute API
 
-           /*try {
+           try {
 
             MovieDB.createViewingParty(user_input);
 
            } catch (SQLException e) {
 
                 e.printStackTrace();
-           }*/
+           }
         }
 	}
 
@@ -52,14 +52,14 @@
             
             // Execute API
 
-           /*try {
+           try {
 
             MovieDB.joinViewingParty(user_input);
 
            } catch (SQLException e) {
 
                 e.printStackTrace();
-           }*/
+           }
         }
     }
 		
@@ -74,14 +74,14 @@
             System.out.println("");
         } else { 
 		
-		    /*try{
+		    try{
 			
             MovieDB.updateViewingPartyMovie(user_input);
 
             } catch (SQLException e) {
 
                 e.printStackTrace();
-            }*/
+            }
 		}
 	}
 }
