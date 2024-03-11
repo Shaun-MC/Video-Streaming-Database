@@ -272,7 +272,7 @@ public class MovieDB {
     }
 
     /**
-      * Creates a new Review and adds it to the DB
+      * Lists all the movies in the DB and nessecary information to create a Viewing Party
       *
       *@ author: Shaun Cushman
       */
