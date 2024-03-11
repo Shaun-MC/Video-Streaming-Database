@@ -14,7 +14,7 @@ public class MovieDB {
     // JDBC URL, username, and password of PostgreSQL server
     private static final String URL = "jdbc:postgresql://localhost/data1.txt"; 
     private static final String USER = "postgres";
-    private static final String PASSWORD = ""; // Local password
+    private static final String PASSWORD = "Minutemankeymethod1547!%"; // Local password
     private static Connection connection = null;
     
     // Functions:
@@ -183,10 +183,16 @@ public class MovieDB {
             e.printStackTrace();
  
         } finally {
- 
-            // Release SQL Objects
-            statement.close();
-            resultSet.close();
+            
+            if(statement != null) {
+                 
+                statement.close();
+            }
+            
+            if(resultSet != null) {
+                 
+                resultSet.close();
+            }
         }
     }
 
@@ -256,8 +262,8 @@ public class MovieDB {
                  
                 statement.close();
             }
-             
-             if(result != null) {
+            
+            if(result != null) {
                  
                 result.close();
             }
@@ -317,8 +323,15 @@ public class MovieDB {
         } finally {
  
             // Release SQL Objects
-            statement.close();
-            resultSet.close();
+            if(statement != null) {
+                 
+                statement.close();
+            }
+            
+            if(resultSet != null) {
+                 
+                resultSet.close();
+            }
         }
     }
 
@@ -356,14 +369,14 @@ public class MovieDB {
             // Assign Nessecary SQL Objects
             p_statement = connection.prepareStatement(query);
 
-            // 1: Account userName
-            // 2: Movie Title
-            // 3: Director Firstname
-            // 4: Director Lastname
-            // 5: Description
-            // 6: Rating
-            // 7: WatchedDate
-            for (int i = 1; i < 8; i++) {
+            // 2: Account userName
+            // 3: Movie Title
+            // 4: Director Firstname
+            // 5: Director Lastname
+            // 6: Description
+            // 7: Rating
+            // 8: WatchedDate
+            for (int i = 2; i < 9; i++) {
 
                 p_statement.setString(i, user_input[i]);
             }
@@ -386,7 +399,10 @@ public class MovieDB {
         } finally {
 
             // Release SQL Objects
-            p_statement.close();
+            if (p_statement != null) {
+
+                p_statement.close();
+            }
         }
 
         return successful_q;
@@ -429,12 +445,12 @@ public class MovieDB {
             // Assign Nessecary SQL Objects
             p_statement = connection.prepareStatement(query);
 
-            // 1: From_Account userName
-            // 2: To_Account userName
-            // 3: Movie Title
-            // 4: Director firstName
-            // 5: Director lastName
-            for (int i = 1; i < 6; i++) {
+            // 2: From_Account userName
+            // 3: To_Account userName
+            // 4: Movie Title
+            // 5: Director firstName
+            // 6: Director lastName
+            for (int i = 2; i < 7; i++) {
 
                 p_statement.setString(i, user_input[i]);
             }
@@ -466,8 +482,15 @@ public class MovieDB {
         } finally {
 
             // Release SQL Objects
-            p_statement.close();
-            resultSet.close();
+            if(p_statement != null) {
+                 
+                p_statement.close();
+            }
+            
+            if(resultSet != null) {
+                 
+                resultSet.close();
+            }
         }
 
         return successful_q;
@@ -488,7 +511,7 @@ public class MovieDB {
         try {
 
             // Open Connection
-            Connection connection = Connect();
+            Connection connection = MovieDB.Connect();
 
             // Create Query 
             String query = "UPDATE Review " +
@@ -506,13 +529,13 @@ public class MovieDB {
             // Assign Nessecary SQL Objects
             p_statement = connection.prepareStatement(query);
 
-            // 1: New Descrption
-            // 2: New Rating
-            // 3: Account userName
-            // 4: Movie Title
-            // 5: Director lastName
-            // 6: Director fistName
-            for (int i = 1; i < 7; i++) {
+            // 2: New Descrption
+            // 3: New Rating
+            // 4: Account userName
+            // 5: Movie Title
+            // 6: Director lastName
+            // 7: Director fistName
+            for (int i = 2; i < 7; i++) {
 
                 p_statement.setString(i, user_input[i]);
             }
@@ -535,7 +558,10 @@ public class MovieDB {
         } finally {
 
             // Release SQL Objects
-            p_statement.close();
+            if(p_statement != null) {
+                 
+                p_statement.close();
+            }
         }
 
         return successful_q;
@@ -575,11 +601,11 @@ public class MovieDB {
             // Assign Nessecary SQL Objects
             p_statement = connection.prepareStatement(query);
 
-            // 1: Account userName
-            // 2: Movie Title
-            // 3: Director firstName
-            // 4: Director lastName
-            for (int i = 1; i < 7; i++) {
+            // 2: Account userName
+            // 3: Movie Title
+            // 4: Director firstName
+            // 5: Director lastName
+            for (int i = 2; i < 6; i++) {
 
                 p_statement.setString(i, user_input[i]);
             }
@@ -602,7 +628,10 @@ public class MovieDB {
         } finally {
 
             // Release SQL Objects
-            p_statement.close();
+            if(p_statement != null) {
+                 
+                p_statement.close();
+            }
         }
 
         return successful_q;
@@ -658,6 +687,7 @@ public class MovieDB {
         	}catch (SQLException exception) {
         		exception.getStackTrace();
         	}finally {
+
         		if(statement != null) {
         			statement.close();
         		}
@@ -712,6 +742,8 @@ public class MovieDB {
         	}catch (SQLException exception) {
         		exception.getStackTrace();
         	}finally {
+
+                
         		if(statement != null) {
         			statement.close();
         		}
@@ -750,6 +782,7 @@ public class MovieDB {
         	}catch (SQLException exception) {
         		exception.getStackTrace();
         	}finally {
+
         		if(statement != null) {
         			statement.close();
         		}
@@ -802,6 +835,7 @@ public class MovieDB {
         	}catch (SQLException exception) {
         		exception.getStackTrace();
         	}finally {
+
         		if(statement != null) {
         			statement.close();
         		}
@@ -841,7 +875,7 @@ public class MovieDB {
             // Assign Nessecary SQL Objects
             p_statement = connection.prepareStatement(query);
 
-            p_statement.setString(1, user_input[0]); // The passed in Genre name 
+            p_statement.setString(1, user_input[2]); // The passed in Genre name 
 
             int success = p_statement.executeUpdate(query);
 
@@ -863,7 +897,10 @@ public class MovieDB {
         } finally {
 
             // Release SQL Objects
-            p_statement.close();
+            if(p_statement != null) {
+
+                p_statement.close();
+            }
         }
 
         return successful_q;
@@ -900,7 +937,7 @@ public class MovieDB {
             // Assign Nessecary SQL Objects
             p_statement = connection.prepareStatement(query);
 
-            p_statement.setString(1, user_input[0]); // The passed in Genre name 
+            p_statement.setString(1, user_input[2]); // The passed in Genre name 
            
             resultSet = p_statement.executeQuery(query);
 
@@ -926,8 +963,16 @@ public class MovieDB {
         } finally {
 
             // Release SQL Objects
-            p_statement.close();
-            resultSet.close();
+
+            if (p_statement != null) {
+
+                p_statement.close();
+            }
+
+            if (resultSet != null) {
+
+                resultSet.close();
+            }
         }
     }
 
@@ -959,9 +1004,9 @@ public class MovieDB {
             // Assign Nessecary SQL Objects
             p_statement = connection.prepareStatement(query);
 
-            // 1: Actor firstName
-            // 2: Actor lastName
-            for (int i = 1; i < 3; i++) {
+            // 2: Actor firstName
+            // 3: Actor lastName
+            for (int i = 2; i < 4; i++) {
 
                 p_statement.setString(i, user_input[i]);
             }
@@ -986,7 +1031,10 @@ public class MovieDB {
         } finally {
 
             // Release SQL Objects
-            p_statement.close();
+            if (p_statement != null) {
+
+                p_statement.close();
+            }
         }
 
         return successful_q;
@@ -1007,7 +1055,7 @@ public class MovieDB {
         try {
 
             // Open Connection
-            Connection connection = Connect();
+            Connection connection = MovieDB.Connect();
 
             // Create Query
             String query = "SELECT M.title " +
@@ -1023,9 +1071,9 @@ public class MovieDB {
             // Assign Nessecary SQL Objects
             p_statement = connection.prepareStatement(query);
 
-            // 1: Actor firstName
-            // 2: Actor lastName
-            for (int i = 1; i < 3; i++) {
+            // 2: Actor firstName
+            // 3: Actor lastName
+            for (int i = 2; i < 4; i++) {
 
                 p_statement.setString(i, user_input[i]);
             }
@@ -1054,8 +1102,16 @@ public class MovieDB {
         } finally {
 
             // Release SQL Objects
-            p_statement.close();
-            resultSet.close();
+
+            if (p_statement != null) {
+
+                p_statement.close();
+            }
+
+            if (resultSet != null) {
+
+                resultSet.close();
+            }
         }
     }
 
@@ -1154,9 +1210,9 @@ public class MovieDB {
             // Assign Nessecary SQL Objects
             p_statement = connection.prepareStatement(query);
 
-            // 1: Actor firstName
-            // 2: Actor lastName
-            for (int i = 1; i < 3; i++) {
+            // 2: Actor firstName
+            // 3: Actor lastName
+            for (int i = 2; i < 4; i++) {
 
                 p_statement.setString(i, user_input[i]);
             }
@@ -1181,7 +1237,10 @@ public class MovieDB {
         } finally {
 
             // Release SQL Objects
-            p_statement.close();
+            if (p_statement != null) {
+
+                p_statement.close();
+            }
         }
 
         return successful_q;

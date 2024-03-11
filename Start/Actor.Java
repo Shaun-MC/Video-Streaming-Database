@@ -63,7 +63,6 @@
         } else { 
             
             // Execute API
-
            try {
 
                 MovieDB.listActorsMovies(user_input);
