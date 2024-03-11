@@ -36,8 +36,8 @@ public class Account {
 
            try {
 
-                MovieDB.createAccount(user_input[2], user_input[3], user_input[4], 
-                                      Integer.parseInt(user_input[5]), user_input[6]);
+                MovieDB.createAccount(Integer.parseInt(user_input[2]), user_input[3], 
+                                      user_input[4], user_input[5], user_input[6]);
 
            } catch (SQLException e) {
 

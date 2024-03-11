@@ -3,24 +3,24 @@
 
 \c postgres
 
-DROP DATABASE MSPlatform;
+DROP DATABASE data1;
 
 SELECT current_database();
 
-CREATE DATABASE MSPlatform;
+CREATE DATABASE data1;
 
-\c MovieDB
+\c data1;
 
 SELECT current_database();
 
 CREATE TABLE ProfilePicture (
-	ID   		char(2),
+	ID   		integer,
 	picture  	VARCHAR(30),
 	
 	Primary Key (ID)
 );
 
-CREATE TABLE Genres(
+CREATE TABLE Genre(
 	ID    integer,
 	name  VARCHAR(40),
 	
@@ -68,12 +68,12 @@ CREATE TABLE MovieToActor(
 
 CREATE TABLE MovieToGenre(
 	MovieID  integer not null,
-	ThemeID  integer not null,
+	GenreID  integer not null,
 	
-	Primary Key (MovieID, ThemeID),
+	Primary Key (MovieID, GenreID),
 
 	Foreign Key (MovieID) references Movie(ID) Deferrable Initially Deferred,
-	Foreign Key (ThemeID) references Theme(ID) Deferrable Initially Deferred 
+	Foreign Key (GenreID) references Genre(ID) Deferrable Initially Deferred 
 );
 
 CREATE TABLE Account(
@@ -81,11 +81,11 @@ CREATE TABLE Account(
 	ProfilePicID   		integer,
 	firstName 			VARCHAR(20) not null,
 	lastName 			VARCHAR(30),
-	email				VARCHAR(30) unqiue, not null
-	userName		   	varchar(30) unique, not null
+	email				VARCHAR(30) unique not null,
+	userName		   	varchar(30) unique not null,
 
 	Primary Key (ID),
-	Foreign Key (ProfilePicID) references ProfilePic(ID) Deferrable Initially Deferred
+	Foreign Key (ProfilePicID) references ProfilePicture(ID) Deferrable Initially Deferred
 );
 
 
@@ -96,7 +96,7 @@ CREATE TABLE ViewingParty(
 	creatorID		integer not null,
 
 	Primary Key 	(ID),
-	Foreign Key (currentMovieID) references Movie(ID) Deferrable Initially Deferred
+	Foreign Key (currentMovieID) references Movie(ID) Deferrable Initially Deferred,
 	Foreign Key (creatorID) references Account(ID) Deferrable Initially Deferred
 );
 
@@ -108,7 +108,7 @@ CREATE TABLE Attendees(
 	Primary Key (AccountID, ViewPartyID),
 
 	Foreign Key (AccountID) references Account(ID) Deferrable Initially Deferred,
-	Foreign Key (ViewPartyID) references ViewParty(ID) Deferrable Initially Deferred 
+	Foreign Key (ViewPartyID) references ViewingParty(ID) Deferrable Initially Deferred 
 );
 
 
@@ -118,7 +118,7 @@ CREATE TABLE Review(
 	MovieID  	  	integer,
 	Description	  	VARCHAR(200) not null,
 	rating		  	integer,
-	watchedDate	  	date
+	watchedDate	  	date,
 
 	Primary Key (ID),
 	Foreign Key (AccountID) references Account(ID) Deferrable Initially Deferred,
@@ -129,6 +129,6 @@ CREATE TABLE Review(
 
 SELECT current_database();
 
-\c MSPlatform
+\c data1
 
 SELECT current_database();

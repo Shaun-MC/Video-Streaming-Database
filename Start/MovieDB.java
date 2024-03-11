@@ -13,12 +13,12 @@ import java.util.Properties;
  
 public class MovieDB {
      
-    // JDBC URL, username, and password of PostgreSQL server (TO BE ACCUSTOMED)
-    private static final String URL = "jdbc:postgresql://localhost:5432/movietoacct"; 
+    // JDBC URL, username, and password of PostgreSQL server
+    private static final String URL = "jdbc:postgresql://localhost:5432/data1"; 
     private static final String USER = "postgres";
-    private static final String PASSWORD = "2606";
+    private static final String PASSWORD = "Minutemankeymethod1547!%";
     private static Connection connection = null;
-     
+    
     // Functions:
     public static Connection Connect() throws SQLException {
          
@@ -28,7 +28,7 @@ public class MovieDB {
          }
          
         int tries = 0;
-         
+
         while(connection == null || connection.isClosed()) {
             
             try {
@@ -47,6 +47,8 @@ public class MovieDB {
                     connection = null;
                     throw new SQLException("Connection not Valid");
                 }
+
+                return connection;
      
              } catch (SQLException e) {
                  
@@ -98,7 +100,7 @@ public class MovieDB {
    * 
    * @author: Chris Chen
    */
-    public static void createAccount(String username, String firstname, String lastname, int profilePicID, String email) throws SQLException {
+    public static void createAccount(int profilePicID, String username, String firstname, String lastname, String email) throws SQLException {
         
         System.out.println("");
          

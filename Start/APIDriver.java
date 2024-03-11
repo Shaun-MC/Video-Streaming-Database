@@ -7,9 +7,6 @@
 
 //import java.sql.*;
 
-//import javax.security.auth.login.AccountException;
-//import javax.swing.text.View;
-
 class APIDriver {
 
     public static void main (String[] args) {
@@ -18,7 +15,7 @@ class APIDriver {
         System.out.println("---Movie Streaming Platform---");
         System.out.println("Input 'L' to list all the available APIs and their required input. (Case Insensitive)");
         System.out.println("Input 'E' to exit the program. (Case Insensitive) ");
-        System.out.println("Input 'H' to get a list of API prefixes");
+        System.out.println("Input 'H' to get a list of API prefixes (Case Insensitive)");
         System.out.println("Input An API Prefix, Name and associated Input to Execute That API. (Case Sensitive)");
 
         String user_input = "";
@@ -28,9 +25,9 @@ class APIDriver {
             System.out.print("MSPlatform: ");
             
             // Retrieve user input from the command line
-            user_input = System.console().readLine();
+            user_input = System.console().readLine(); // Parse Input
 
-            String[] commands = user_input.split(" ", 2);
+            String[] commands = user_input.split("\\s+");
 
             switch (commands[0]) {
 
@@ -309,4 +306,5 @@ class APIDriver {
         System.out.println("ACT = Actor");
         System.out.println("--End Of Prefixes--");
     }
+
 }
