@@ -26,7 +26,7 @@ public class Director {
 
             // Print detailed explanation of the API
             System.out.println("createDirector - creates a new Director and adds it the DB");
-            System.out.println("Command: createDirector <firstName> <lastName");
+            System.out.println("Command: <D> createDirector <firstName> <lastName");
 
             System.out.println("");
 

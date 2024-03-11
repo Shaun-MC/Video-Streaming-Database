@@ -26,7 +26,7 @@
 
             // Print detailed explanation of the API
             System.out.println("createActor - creates an Actor and adds them to the DB");
-            System.out.println("Command: createActor <Actor Fistname> <Actor Lastname>");
+            System.out.println("Command: <ACT> createActor <Actor Fistname> <Actor Lastname>");
 
             System.out.println("");
 
@@ -57,7 +57,7 @@
 
             // Print detailed explanation of the API
             System.out.println("listActorsMovies - lists all the movie title associated w/ a specific actor");
-            System.out.println("Command: listActorsMovies <Actor Fistname> <Actor Lastname>");
+            System.out.println("Command: <ACT> listActorsMovies <Actor Fistname> <Actor Lastname>");
 
             System.out.println("");
         } else { 

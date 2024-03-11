@@ -28,7 +28,7 @@ public class Movie {
 
             // Print detailed explanation of the API
             System.out.println("createNewMovie - creates a new movie and adds it the DB");
-            System.out.println("Command: createMovie <synopsis> <directorFirstName> <directorLastName> <runtime>");
+            System.out.println("Command: <M> createMovie <synopsis> <directorFirstName> <directorLastName> <runtime>");
 
             System.out.println("");
 
@@ -71,7 +71,7 @@ public class Movie {
  
             // Print detailed explanation of the API
             System.out.println("listMovieInformation - lists a movies title, runtime, and the directors first and last name");
-            System.out.println("Command: listMovieInformation <'Z'>");
+            System.out.println("Command: <M> listMovieInformation <'Z'>");
 
             System.out.println("");
 

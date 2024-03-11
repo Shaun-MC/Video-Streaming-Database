@@ -90,7 +90,7 @@
  
             // Print detailed explanation of the API
             System.out.println("updateReview - updates an accounts review of a movie (description and rating only)");
-            System.out.println("Command: updateReview <account_userName> <movie_title> <director_firstName> <director_lastName> <newDescription> <newRating>");
+            System.out.println("Command: <R> updateReview <account_userName> <movie_title> <director_firstName> <director_lastName> <newDescription> <newRating>");
 
             System.out.println("");
         } else { 
