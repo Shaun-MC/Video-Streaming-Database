@@ -8,13 +8,19 @@
 
 import java.sql.*;
 import java.util.Properties;
+
+// ---------------------------------------------------------------------------------------------
+// Known Optimizations (If The Project Would Connect)
+    // Create an Index w/ Movie Title, Director Firstname and Director_last as that query is executed 
+    // multiple times for the same reason (retrive a specific movie using those qualifiers)
+// ---------------------------------------------------------------------------------------------
  
 public class MovieDB {
      
     // JDBC URL, username, and password of PostgreSQL server
     private static final String URL = "jdbc:postgresql://localhost/data1.txt"; 
     private static final String USER = "postgres";
-    private static final String PASSWORD = "Minutemankeymethod1547!%"; // Local password
+    private static final String PASSWORD = ""; // Local password
     private static Connection connection = null;
     
     // Functions:
