@@ -277,7 +277,7 @@ class APIDriver {
 
     private static void ListOfAPIs() { // DONE
 
-        String[] temp = {"X", "X"}; // Engineer Fix
+        String[] temp = {"", ""}; // Engineer Fix
        
         // Calls all the currently available APIs
         APIDriver.callAccountAPIs(temp); // UNTESTED - Complete List

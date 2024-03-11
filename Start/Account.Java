@@ -20,11 +20,15 @@ public class Account {
 
     public static void createAccount(String[] user_input) {
 
-        if (user_input == null) {
- 
+        if (user_input == null || user_input[0] == "") {
+            
+            System.out.println("--Account--");
+
             // Print detailed explanation of the API
             System.out.println("createAccount - creates an Account and adds them to the DB");
             System.out.println("Command: createAccount <ProfilePicID> <firstName> <lastName> <userName> <email>");
+
+            System.out.println("");
 
         } else { 
             
@@ -44,11 +48,13 @@ public class Account {
 
     public static void listAccountInfo(String[] user_input) {
 
-        if (user_input == null) {
+        if (user_input == null || user_input[0] == "") {
  
             // Print detailed explanation of the API
             System.out.println("listAccountInfo - lists all the account usernames and emails");
             System.out.println("Command: listAccountInfo <'Z'>");
+
+            System.out.println("");
 
         } else { 
             

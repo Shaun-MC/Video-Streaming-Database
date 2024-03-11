@@ -20,11 +20,15 @@ public class Genre {
 
     public static void createGenre(String[] user_input) {
 
-        if (user_input == null) {
- 
+        if (user_input == null || user_input[0] == "") {
+            
+            System.out.println("--Genre--");
+
             // Print detailed explanation of the API
             System.out.println("createNewGenre - creates a new genre and adds it the DB");
             System.out.println("Command: createNewGenre <Genre Name>");
+
+            System.out.println("");
 
         } else { 
             
@@ -49,11 +53,13 @@ public class Genre {
 
     public static void listAllMoviesPerGenre(String [] user_input) {
 
-        if (user_input == null) {
+        if (user_input == null || user_input[0] == "") {
  
             // Print detailed explanation of the API
-            System.out.println("listAllMovies - Returns a list of all the movies associated w/ a genre");
+            System.out.println("listAllMoviesPerGenre - Returns a list of all the movies associated w/ a genre");
             System.out.println("Command: listAllMoviesPerGenre <Genre Name>");
+
+            System.out.println("");
 
         } else { 
             

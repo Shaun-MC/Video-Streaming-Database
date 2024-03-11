@@ -7,7 +7,6 @@
  */
 
 import java.sql.*;
-//import java.util.HashMap;
 import java.util.Properties;
 
 //import javax.naming.spi.DirStateFactory.Result;
@@ -610,9 +609,209 @@ public class MovieDB {
 
 
     // ---------------------------------------------------------------------------------------------------------
-    // Viewing Parties:
+    // Viewing Party:
     // ---------------------------------------------------------------------------------------------------------
+    public static boolean createViewingParty(String[] user_input) throws SQLException{
+		System.out.println("");
+		
+		String title = user_input[0];
+		String movie_title = user_input[1];
+		String director_firstname = user_input[2];
+		String user_name = user_input[3];
+		
+		Statement statement = null;
+    	ResultSet result = null;
+    	
+    	try {
+    		Connection connection = Connect();
+    		
+    		String sqlStatement = "SELECT *"
+    							+ "FROM ViewingParty vp"
+    							+ "JOIN account a ON (vp.creatorID = a.ID)"
+    							+ "WHERE a.username = " + user_name + ";"; 
+    		
+    		statement = connection.createStatement();
+        	result = statement.executeQuery(sqlStatement);
+        	
+        	if(result != null) {
+        		System.out.println("A viewing party for this username already exist!");
+        		System.out.println("");
+        		return false;
+        	}
+        	
+        	if(statement != null) {
+    			statement.close();
+    		}
+    		
+        	sqlStatement = "INSERT INTO ViewingParty(title, currentMovie, creatorID)"
+        				 + "VALUES(" + title + ", (SELECT ID FROM MOVIE m JOIN DIRECTOR d ON (m.directorID = d.id) WHERE m.title = " 
+        				 + movie_title + " AND d.firstname = " + director_firstname + "), (SELECT id FROM account WHERE account.username = "
+        				 + user_name + "));";
+        	statement = connection.createStatement();
+        	result = statement.executeQuery(sqlStatement);
+        	
+        	if(result != null) {
+        		System.out.println("Viewing party successfully added!");
+        	}
+        	
+        	}catch (SQLException exception) {
+        		exception.getStackTrace();
+        	}finally {
+        		if(statement != null) {
+        			statement.close();
+        		}
+        		if(result != null) {
+        			result.close();
+        		}
+        		
+            }
+    	return true;
 
+	}
+	
+	public static boolean joinViewingParty(String[] user_input) throws SQLException{
+		System.out.println("");
+		
+		String host_name = user_input[0];
+		String attendee_name = user_input[1];
+		
+		Statement statement = null;
+    	ResultSet result = null;
+    	
+    	try {
+    		Connection connection = Connect();
+    		String sqlStatement = "SELECT *"
+					+ "FROM ViewingParty vp"
+					+ "JOIN account a ON (vp.creatorID = a.ID)"
+					+ "WHERE a.username = " + host_name + ";"; 
+    		
+    		statement = connection.createStatement();
+        	result = statement.executeQuery(sqlStatement);
+        	
+    		if(result == null) {
+        		System.out.println("A viewing party for this username does not exist!");
+        		System.out.println("");
+        		return false;
+        	}	
+    		
+    		statement.close();
+    		result.close();
+    			
+    		sqlStatement = "INSERT INTO Attendees(AccountID, ViewingPartyID)"
+    				     + "VALUES((SELECT ID FROM account WHERE account.username = " + attendee_name +"), "
+    				     + "(SELECT ID FROM ViewingParty vp JOIN account a ON (vp.creatorid = a.id) WHERE a.username =" + host_name + ";";
+    		
+    		statement = connection.createStatement();
+        	result = statement.executeQuery(sqlStatement);
+    			
+        	if(result != null) {
+        		System.out.println("Account successfully added!");
+        	}
+        	
+        	}catch (SQLException exception) {
+        		exception.getStackTrace();
+        	}finally {
+        		if(statement != null) {
+        			statement.close();
+        		}
+        		if(result != null) {
+        			result.close();
+        		}
+        		
+            }
+    	return true;
+    		
+	}
+	
+	public static boolean updateViewingPartyMovie(String [] user_input) throws SQLException{
+		System.out.println("");
+		
+		String movie_title = user_input[0];
+		String director_firstname = user_input[1];
+		String creator_name = user_input[2];
+		
+		Statement statement = null;
+    	ResultSet result = null;
+    	
+    	try {
+    		Connection connection = Connect();
+    		String sqlStatement = "UPDATE ViewingParty"
+    							+ "SET currentmovie = (SELECT ID FROM MOVIE m JOIN DIRECTOR d ON (m.directorID = d.id) WHERE m.title ="
+    							+ movie_title + "AND d.firstname =" + director_firstname + ")"
+    							+ "WHERE creatorID = (SELECT ID from account WHERE username = " + creator_name +");";
+    		statement = connection.createStatement();
+        	result = statement.executeQuery(sqlStatement);
+        	
+        	if(result != null) {
+        		System.out.println("Account successfully added!");
+        	}
+        	
+        	}catch (SQLException exception) {
+        		exception.getStackTrace();
+        	}finally {
+        		if(statement != null) {
+        			statement.close();
+        		}
+        		if(result != null) {
+        			result.close();
+        		}
+        		
+            }
+    	return true;
+	}
+		
+	public static boolean removeViewingParty(String [] user_input) throws SQLException{
+		System.out.println("");
+		
+		String user_name = user_input[0];
+		
+		Statement statement = null;
+    	ResultSet result = null;
+    	
+    	try {
+    		Connection connection = Connect();
+    		
+    		String sqlStatement = "SELECT *"
+    							+ "FROM ViewingParty vp"
+    							+ "JOIN account a ON (vp.creatorID = a.ID)"
+    							+ "WHERE a.username = " + user_name + ";"; 
+    		
+    		statement = connection.createStatement();
+        	result = statement.executeQuery(sqlStatement);
+        	
+        	if(result == null) {
+        		System.out.println("A viewing party for this username does not exist!");
+        		System.out.println("");
+        		return false;
+        	}
+        	
+        	statement.close();
+    		result.close();
+    		
+    		sqlStatement = "DELETE FROM ViewingParty"
+    				     + "WHERE creatorID = (SELECT ID FROM account WHERE username = " + user_name + "); ";
+    		
+    		statement = connection.createStatement();
+        	result = statement.executeQuery(sqlStatement);
+    			
+        	if(result != null) {
+        		System.out.println("View Party Successfully removed!");
+        	}
+        	
+        	}catch (SQLException exception) {
+        		exception.getStackTrace();
+        	}finally {
+        		if(statement != null) {
+        			statement.close();
+        		}
+        		if(result != null) {
+        			result.close();
+        		}
+        		
+            }
+    	return true;
+
+	}
     // ---------------------------------------------------------------------------------------------------------
     // Genre
     // ---------------------------------------------------------------------------------------------------------

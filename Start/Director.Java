@@ -20,11 +20,15 @@ public class Director {
 
     public static boolean createDirector(String [] user_input) {
 
-        if (user_input == null) {
- 
+        if (user_input == null || user_input[0] == "") {
+            
+            System.out.println("--Director--");
+
             // Print detailed explanation of the API
             System.out.println("createDirector - creates a new Director and adds it the DB");
             System.out.println("Command: createDirector <firstName> <lastName");
+
+            System.out.println("");
 
         } else { 
             

@@ -19,11 +19,15 @@
 
     public static void insertProfilePicture(String[] user_input) {
 
-        if (user_input == null) {
- 
+        if (user_input == null || user_input[0] == "") {
+            
+            System.out.println("--Profile Picture--");
+
             // Print detailed explanation of the API
             System.out.println("insertProfilePicture - creates a new movie and adds it the DB");
             System.out.println("Command: insertProfilePicture <file_path>");
+
+            System.out.println("");
 
         } else { 
             

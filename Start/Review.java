@@ -22,11 +22,15 @@
 
     public static void createReivew(String[] user_input) {
 
-        if (user_input == null) {
- 
+        if (user_input == null || user_input[0] == "") {
+            
+            System.out.println("--Review--");
+
             // Print detailed explanation of the API
             System.out.println("createReivew - creates an Reivew and adds them to the DB");
             System.out.println("Command: createReview <account_userName> <movie_name> <director_firstName> <description> <rating> <date_watched");
+
+            System.out.println("");
 
         } else { 
             
@@ -51,11 +55,13 @@
 
     public static void shareReview(String[] user_input) {
 
-        if (user_input == null) {
+        if (user_input == null || user_input[0] == "") {
  
             // Print detailed explanation of the API
             System.out.println("shareReview - 'shares' a review with another user through email");
             System.out.println("Command: shareReview - <from_accountUserName> <to_accountUserName> <movie_name> <director_firstName>");
+
+            System.out.println("");
 
         } else { 
             
@@ -80,12 +86,13 @@
 
     public static void updateReview(String[] user_input) {
 
-        if (user_input == null) {
+        if (user_input == null || user_input[0] == "") {
  
             // Print detailed explanation of the API
             System.out.println("updateReview - updates an accounts review of a movie (description and rating only)");
             System.out.println("Command: updateReview <account_userName> <movie_title> <director_firstName> <director_lastName> <newDescription> <newRating>");
 
+            System.out.println("");
         } else { 
             
             // Execute API
@@ -109,11 +116,13 @@
       
       public static void deleteReview(String[] user_input) {
 
-        if (user_input == null) {
- 
+        if (user_input == null || user_input[0] == "") {
+            
             // Print detailed explanation of the API
             System.out.println("deleteReview - deletes a review from a users account");
             System.out.println("Command: deleteReview <account_userName> <movie_title> <director_firstName>");
+
+            System.out.println("");
 
         } else { 
             

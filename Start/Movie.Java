@@ -22,11 +22,15 @@ public class Movie {
 
     public static boolean createMovie(String[] user_input) {
 
-        if (user_input == null) {
- 
+        if (user_input == null || user_input[0] == "") {
+            
+            System.out.println("--Movie--");
+
             // Print detailed explanation of the API
             System.out.println("createNewMovie - creates a new movie and adds it the DB");
             System.out.println("Command: createMovie <synopsis> <directorFirstName> <directorLastName> <runtime>");
+
+            System.out.println("");
 
         } else { 
             
@@ -63,11 +67,13 @@ public class Movie {
 
     public static void listMovieInformation(String[] user_input) {
 
-        if (user_input == null) {
+        if (user_input == null || user_input[0] == "") {
  
             // Print detailed explanation of the API
             System.out.println("listMovieInformation - lists a movies title, runtime, and the directors first and last name");
             System.out.println("Command: listMovieInformation <'Z'>");
+
+            System.out.println("");
 
         } else { 
             
